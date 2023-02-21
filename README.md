@@ -5,8 +5,8 @@
 
 ## Introduction
 
-A common task is recording the time a process started, was paused/resumed, and the time when it
-was completed. An object of type [`TimeTracker`][TimeTracker] is designed to perform this job.
+A common task is recording the time a process starts, is paused/resumed, and the time it
+is completed. An object of type [`TimeTracker`][TimeTracker] is designed to perform this job.
 In some sense it is similar to a [`StopWatch`][StopWatch]
 however instead of elapsed ticks it records a [`DateTime`][DateTime] point whenever its
 status changes.
@@ -167,6 +167,6 @@ Please file feature requests and bugs at the [issue tracker].
 
 [time_tracker]: https://pub.dev/packages/time_tracker
 
-[Time_Tracker]: https://pub.dev/documentation/time_tracker/latest/time_tracker/TimeTracker-class.html
+[TimeTracker]: https://pub.dev/documentation/time_tracker/latest/time_tracker/TimeTracker-class.html
 
 [StopWatch]: https://api.dart.dev/stable/dart-core/Stopwatch-class.html
