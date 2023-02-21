@@ -5,15 +5,15 @@
 ## Introduction
 
 A commonly required task consists in recording the time a process *starts*, is *paused/resumed*,
-and the time it 
+and the time it
 is *completed*. An object of type [`TimeTracker`][TimeTracker] is designed to perform this job.
 It is similar to a [`StopWatch`][StopWatch],
 however instead of elapsed ticks it records a [`DateTime`][DateTime] point
 whenever its status changes.
 
 The image below shows the available states (blue font) defined by
-the class [`TimeTracker`][TimeTracker] and available transitions (orange arrows)
-from one state to another.
+the enum [`TimeStatus`][TimeStatus] and available transitions (orange arrows)
+defined by the class [`TimeTracker`][TimeTracker].
 
 ![TimeStatus](https://github.com/simphotonics/time_tracker/raw/main/images/time_status.svg?sanitize=true)
 
@@ -173,6 +173,8 @@ Please file feature requests and bugs at the [issue tracker].
 [example]: example
 
 [time_tracker]: https://pub.dev/packages/time_tracker
+
+[TimeStatus]: https://pub.dev/documentation/time_tracker/latest/time_tracker/TimeStatus.html
 
 [TimeTracker]: https://pub.dev/documentation/time_tracker/latest/time_tracker/TimeTracker-class.html
 
