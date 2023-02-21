@@ -4,11 +4,12 @@
 
 ## Introduction
 
-A common task is recording the time a process starts, is paused/resumed, and the time it
-is completed. An object of type [`TimeTracker`][TimeTracker] is designed to perform this job.
-In some sense it is similar to a [`StopWatch`][StopWatch]
-however instead of elapsed ticks it records a [`DateTime`][DateTime] point whenever its
-status changes.
+A common task is recording the time a process *starts*, is *paused/resumed*,
+and the time it
+is *completed*. An object of type [`TimeTracker`][TimeTracker] is designed to perform this job.
+It is similar to a [`StopWatch`][StopWatch],
+however instead of elapsed ticks it records a [`DateTime`][DateTime] point
+whenever its status changes.
 
 The image below shows the available tracker states (blue font) and available
 transitions (orange arrows) from one state to the another.
