@@ -1,7 +1,6 @@
 
 # Time Tracker
-
-[![Dart](https://github.com/simphotonics/directed_graph/actions/workflows/dart.yml/badge.svg)](https://github.com/simphotonics/directed_graph/actions/workflows/dart.yml)
+[![Dart](https://github.com/simphotonics/time_tracker/actions/workflows/dart.yml/badge.svg)](https://github.com/simphotonics/time_tracker/actions/workflows/dart.yml)
 
 ## Introduction
 
