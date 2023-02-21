@@ -1,3 +1,5 @@
+import '../src/extensions/equal.dart';
+
 /// Interface adding the method `toJson()`.
 abstract class Serializable {
   Map<String, dynamic> toJson();
@@ -152,6 +154,23 @@ class TimeTracker implements Serializable, TimeControls {
     }
   }
 
+  /// Returns the duration of all pauses added together.
+  /// If the object is in status `TimeStatus.paused`, then the
+  /// difference between `DateTime.now()` and the last recorded time point
+  /// is considered to be the duration of the last pause.
+  Duration get durationOfPauses {
+    switch (_status) {
+      case TimeStatus.ready:
+      case TimeStatus.started:
+        return Duration.zero;
+      case TimeStatus.paused:
+        return duration + DateTime.now().difference(lastTimePoint!);
+      case TimeStatus.resumed:
+      case TimeStatus.ended:
+        return lastTimePoint!.difference(startTime!) - duration;
+    }
+  }
+
   /// Returns the recorded time points of the object. Every time the object is
   /// paused or resumed an additional time point is added.
   /// * The first entry is the start point.
@@ -207,11 +226,12 @@ class TimeTracker implements Serializable, TimeControls {
   bool operator ==(Object other) {
     return other is TimeTracker &&
         other._status == _status &&
-        other._timePoints == _timePoints;
+        other._timePoints.equal(_timePoints);
   }
 
   @override
   String toString() {
-    return 'TimeTrackable: status = ${status.name}, timePoints: $dateTimePoints';
+    return 'TimeTrackable: status = ${status.name}, '
+        'timePoints: $dateTimePoints';
   }
 }
