@@ -1,5 +1,4 @@
 extension Equal<T extends Comparable> on List<T> {
-
   /// Returns `true` if `this[i] == other[i]` for
   /// each index `i`.
   /// ---

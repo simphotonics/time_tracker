@@ -96,7 +96,8 @@ void main() {
     });
     test('paused -> started', () {
       final tracker = TimeTracker.startNow()
-        ..pause() ..start();
+        ..pause()
+        ..start();
       expect(tracker.timePoints, hasLength(2));
       expect(tracker, HasStatus(TimeStatus.paused));
     });
@@ -109,7 +110,9 @@ void main() {
     });
     test('resumed -> started', () {
       final tracker = TimeTracker.startNow()
-        ..pause()..resume()..start();
+        ..pause()
+        ..resume()
+        ..start();
       expect(tracker, HasStatus(TimeStatus.resumed));
       expect(tracker.timePoints, hasLength(3));
     });
@@ -123,7 +126,8 @@ void main() {
     });
     test('ended -> started', () {
       final tracker = TimeTracker.startNow()
-                ..end()..start();
+        ..end()
+        ..start();
       expect(tracker, HasStatus(TimeStatus.ended));
       expect(tracker.timePoints, hasLength(2));
     });
