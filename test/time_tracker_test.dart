@@ -7,6 +7,18 @@ class HasStatus<T extends TimeTracker> extends CustomMatcher {
   featureValueOf(actual) => (actual as T).status;
 }
 
+class HasDurationLargerZero<T extends TimeTracker> extends CustomMatcher {
+  HasDurationLargerZero() : super("TimeTracker with:", "duration", true);
+  @override
+  featureValueOf(actual) => (actual as T).duration > Duration.zero;
+}
+
+class HasPausesLargerZero<T extends TimeTracker> extends CustomMatcher {
+  HasPausesLargerZero() : super("TimeTracker with:", "duration", true);
+  @override
+  featureValueOf(actual) => (actual as T).durationOfPauses > Duration.zero;
+}
+
 void main() {
   group('Constructors:', () {
     test('default', () {
@@ -154,9 +166,94 @@ void main() {
     });
   });
 
-  group('Time Points', () {});
-  group('Serialize', () {});
+  group('Time Points:', () {
+    test('startTime ready', () {
+      final tracker = TimeTracker();
+      expect(tracker.startTime, isNull);
+      expect(tracker.endTime, isNull);
+    });
+    test('startTime started', () {
+      final tracker = TimeTracker.startNow();
+      expect(tracker.startTime, isNotNull);
+      expect(tracker.endTime, isNull);
+    });
+    test('startTime paused', () {
+      final tracker = TimeTracker.startNow()..pause();
+      expect(tracker.startTime, isNotNull);
+      expect(tracker.endTime, isNull);
+    });
+    test('startTime paused', () {
+      final tracker = TimeTracker.startNow()
+        ..pause()
+        ..resume();
+      expect(tracker.startTime, isNotNull);
+      expect(tracker.endTime, isNull);
+    });
+    test('startTime paused', () {
+      final tracker = TimeTracker.startNow()
+        ..pause()
+        ..resume()
+        ..end();
+      expect(tracker.startTime, isNotNull);
+      expect(tracker.endTime, isNotNull);
+    });
+  });
 
-  group('Deserialize', () {});
+  group('Duration:', () {
+    test('ready', () {
+      final tracker = TimeTracker();
+      expect(tracker.duration, Duration.zero);
+      expect(tracker.durationOfPauses, Duration.zero);
+    });
+    test('started', () {
+      final tracker = TimeTracker()..start();
+      expect(tracker, HasDurationLargerZero());
+      expect(tracker.durationOfPauses, Duration.zero);
+    });
+
+    test('paused', () {
+      final tracker = TimeTracker.startNow()..pause();
+      expect(tracker, HasDurationLargerZero());
+      expect(tracker, HasPausesLargerZero());
+    });
+    test('end', () {
+      final tracker = TimeTracker.startNow()
+        ..pause()
+        ..resume()
+        ..end();
+      expect(tracker, HasDurationLargerZero());
+      expect(tracker, HasPausesLargerZero());
+      final totalTime = tracker.endTime!.difference(tracker.startTime!);
+      expect(totalTime, tracker.duration + tracker.durationOfPauses);
+    });
+  });
+  group('Serialize:', () {
+    test('json', () {
+      final tracker = TimeTracker()
+        ..start()
+        ..pause()
+        ..resume()
+        ..end();
+
+      final json = tracker.toJson();
+      expect(tracker.status.toJson(), json[TimeTracker.$status]);
+      expect(tracker.timePoints, json[TimeTracker.$timePoints]);
+    });
+  });
+
+  group('Deserialize:', () {
+    test('json', () {
+      final tracker = TimeTracker()
+        ..start()
+        ..pause()
+        ..resume()
+        ..end();
+
+      final json = tracker.toJson();
+
+      final revivedTracker = TimeTracker.fromJson(json);
+      expect(tracker, revivedTracker);
+    });
+  });
   group('Equality', () {});
 }
