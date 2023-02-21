@@ -10,11 +10,11 @@ abstract class TimeControls {
   void start();
 
   /// Pauses the objects time line. Adds a time point
-  /// indicating the start of the pause.
+  /// indicating the start of a pause.
   void pause();
 
   /// Resumes a paused object. Adds a time point,
-  /// indicating the end of the pause.
+  /// indicating the end of a pause.
   void resume();
 
   /// Ends the objects time line. Records the last time point.
@@ -49,21 +49,24 @@ enum TimeStatus implements Serializable {
   Map<String, dynamic> toJson() => {'timeStatus': index};
 }
 
-/// A Dart object that remembers its creation time.
-/// * The object can be paused, resumed, and ended.
+/// A Dart object that records time-status changes.
+/// * The object can be started, paused, resumed, and ended.
 /// * To retrieve the current state use the getter `status`.
-/// * To retrieve the recorded time points use the getter `timePoints`.
-///   Note: Every time the object is paused or resumed a new time point is
+/// * To retrieve the recorded time points use the getter `dateTimePoints`.
+/// * To retrieve the recorded time points as microseconds since epoch use
+///   getter `timePoints`.
+///   Note: Every time the objects status changes a new time point is
 ///   added.
 class TimeTracker implements Serializable, TimeControls {
   TimeStatus _status = TimeStatus.ready;
   final _timePoints = <int>[];
 
-  /// Constructs a `TimeTracker` object in ready condition.
+  /// Constructs a `TimeTracker` object with status `TimeStatus.ready`.
   TimeTracker();
 
-  /// Constructs a `TimeTracker` object in started condition.
-  /// Note: The instantiation time is the first time point in `timePoints`.
+  /// Constructs a `TimeTracker` object with status `TimeStatus.started`.
+  /// Note: The instantiation time is the first time point recorded
+  /// in `timePoints`.
   TimeTracker.startNow() {
     _timePoints.add(DateTime.now().microsecondsSinceEpoch);
     _status = TimeStatus.started;
@@ -83,6 +86,9 @@ class TimeTracker implements Serializable, TimeControls {
         $timePoints: List.of(_timePoints, growable: false)
       };
 
+  /// Sets the time status of the object to `TimeStatus.started`
+  /// if the current time status is `TimeStatus.ready`.
+  /// Records the first time point.
   @override
   void start() {
     if (_status == TimeStatus.ready) {
@@ -91,9 +97,9 @@ class TimeTracker implements Serializable, TimeControls {
     }
   }
 
-  /// Sets the time status of the object to `TimeStatus.paused`.
-  /// Note: Objects with status `TimeStatus.ended` can not be
-  /// paused.
+  /// Sets the time status of the object to `TimeStatus.paused`
+  /// if the current time status is `TimeStatus.started` or
+  /// `TimeStatus.resumed` and adds a time point.
   @override
   void pause() {
     if (_status == TimeStatus.started || _status == TimeStatus.resumed) {
@@ -102,9 +108,9 @@ class TimeTracker implements Serializable, TimeControls {
     }
   }
 
-  /// Sets the time status of the object to `TimeStatus.started`.
-  /// Note: Objects with status `TimeStatus.ended` can not be
-  /// resumed or paused.
+  /// Sets the time status of the object to `TimeStatus.resumed`
+  /// if the current status is `Timestatus.paused` and adds
+  /// a time point.
   @override
   void resume() {
     if (_status == TimeStatus.paused) {
