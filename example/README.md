@@ -1,4 +1,4 @@
-# List Operators - Example
+# Time Tracker - Example
 [![Dart](https://github.com/simphotonics/time_tracker/actions/workflows/dart.yml/badge.svg)](https://github.com/simphotonics/time_tracker/actions/workflows/dart.yml)
 
 The folder `bin` contains a short program that demonstrate a use case of
