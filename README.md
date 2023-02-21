@@ -11,8 +11,9 @@ It is similar to a [`StopWatch`][StopWatch],
 however instead of elapsed ticks it records a [`DateTime`][DateTime] point
 whenever its status changes.
 
-The image below shows the available tracker states (blue font) and available
-transitions (orange arrows) from one state to the another.
+The image below shows the available states (blue font) of a
+[`TimeTracker`][TimeTracker] and available transitions (orange arrows)
+from one state to another.
 
 ![TimeStatus](https://github.com/simphotonics/time_tracker/raw/main/images/time_status.svg?sanitize=true)
 
