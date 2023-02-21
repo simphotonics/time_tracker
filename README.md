@@ -135,7 +135,7 @@ void main(List<String> arguments) async {
 <details> <summary> Click to show the console output. </summary>
 
 ```Console
-$ dart time_tracker_example.dart
+$ dart example/bin/time_tracker_example.dart
 
 ----- Create object of type TennisMatch -----
 Status: started at: 2023-02-21 13:13:18.356681
