@@ -195,7 +195,7 @@ class TimeTracker implements Serializable, TimeControls {
   ///   status is `TimeStatus.ended`.
   List<int> get timePoints => [..._timePoints];
 
-  /// Returns the creation time of the object or `null` if the tracker was
+  /// Returns the start time of the object or `null` if the tracker was
   /// not started yet.
   DateTime? get startTime => (_status == TimeStatus.ready)
       ? null
@@ -237,7 +237,6 @@ class TimeTracker implements Serializable, TimeControls {
 
   @override
   String toString() {
-    return 'TimeTrackable: status = ${status.name}, '
-        'timePoints: $dateTimePoints';
+    return 'TimeTrackable: status = ${status.name}';
   }
 }
