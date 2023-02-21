@@ -42,7 +42,7 @@ echo -e "${PURPLE}=== Checking Source Code Formatting${RESET} $PWD..."
 echo
 # Overwrite files with formatted content: -w
 # Dry run: -n
-dart format bin lib test
+dart format example lib test
 
 # Analyze dart files
 echo
@@ -51,10 +51,7 @@ echo
 dart analyze \
     --fatal-warnings \
     --fatal-infos
-    # \
-    # --packages="$PWD/.packages" \
-    # $(find bin lib test -name \*.dart 2>/dev/null)
-
+    
 # Running tests
 echo
 echo -e "${CYAN}=== Testing $PWD...${RESET}"
