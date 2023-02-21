@@ -11,16 +11,20 @@ In some sense it is similar to a [`StopWatch`][StopWatch]
 however instead of elapsed ticks it records a [`DateTime`][DateTime] point whenever its
 status changes.
 
-The image below shows the available tracker states (blue font), transitions (orange arrows),
-and status changing methods (green font).
-
-Calling a status changing method when there is no transition defined has no effect.
-For example, calling the method `end()` when the object has status `TimeStatus.ready`.
+The image below shows the available tracker states (blue font) and available
+transitions (orange arrows) from one state to the another.
 
 ![TimeStatus](https://github.com/simphotonics/time_tracker/raw/main/images/time_status.svg?sanitize=true)
 
-The class [`TimeTracker`][TimeTracker] provides methods for json-serialization. It overrides
-the equality operator such that objects with the same status and the same recorded time
+Status changing methods are printed with green font. Calling a status changing
+method where there is no transition defined has no effect.
+For example: calling the method `end()` when the object has status
+`TimeStatus.ready` has no effect.
+
+In addition to methods for recording time points,
+the class [`TimeTracker`][TimeTracker] provides methods for json-serialization.
+It overrides the equality operator such that objects with the
+same status and the same recorded time
 points are considered equal. As such, a deserialized object will compare equal
 to the original object.
 
@@ -162,6 +166,8 @@ The source code of the program shown above can be found in the folder [example].
 Please file feature requests and bugs at the [issue tracker].
 
 [issue tracker]: https://github.com/simphotonics/time_tracker/issues
+
+[DateTime]: https://api.dart.dev/stable/dart-core/DateTime-class.html
 
 [example]: example
 
