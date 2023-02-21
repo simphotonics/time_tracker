@@ -4,8 +4,8 @@
 
 ## Introduction
 
-A common task is recording the time a process *starts*, is *paused/resumed*,
-and the time it
+A commonly required task consists in recording the time a process *starts*, is *paused/resumed*,
+and the time it 
 is *completed*. An object of type [`TimeTracker`][TimeTracker] is designed to perform this job.
 It is similar to a [`StopWatch`][StopWatch],
 however instead of elapsed ticks it records a [`DateTime`][DateTime] point
