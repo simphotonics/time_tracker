@@ -146,25 +146,17 @@ void main() async {
 ```Console
 $ dart example/bin/time_tracker_example.dart
 ----- Create an object of type TennisMatch -----
-Status: started at: 2024-05-23 18:30:06.167586
-Status: paused at: 2024-05-23 18:30:06.176602
-Status: resumed at: 2024-05-23 18:30:06.180479
-Status: ended at: 2024-05-23 18:30:06.183586
+Status: started at: 2024-05-23 21:23:27.831544
+Status: paused at: 2024-05-23 21:23:30.841633
+Status: resumed at: 2024-05-23 21:23:31.845723
+Status: ended at: 2024-05-23 21:23:33.847798
 
 ---------- Json Encoding -------------
 Serialized object:
-{"_status":{"timeStatus":"ended"},
- "_timePoints":[
-   1716485406167586,
-   1716485406176602,
-   1716485406180479,
-   1716485406183586,
- ],
- "players":["Tim","Andy"],
-}
+{"_status":{"timeStatus":"ended"},"_timePoints":[1716495807831544,1716495810841633,1716495811845723,1716495813847798],"players":["Tim","Andy"]}
 
 Deserialized object:
-TennisMatch: players: [Tim, Andy] | status: ended | duration: 0:00:00.012123
+TennisMatch: players: [Tim, Andy] | status: ended | duration: 0:00:05.012164
 
 match == decodedMatch: true
 ```

@@ -8,19 +8,19 @@ void main() async {
   print('----- Create an object of type TennisMatch -----');
   print('Status: ${match.status.name} at: ${match.startTime}');
 
-  await Future.delayed(const Duration(milliseconds: 3), () {
+  await Future.delayed(const Duration(seconds: 3), () {
     // Pause object
     match.pause();
     print('Status: ${match.status.name} at: ${match.lastTimePoint}');
   });
 
-  await Future.delayed(const Duration(milliseconds: 1), () {
+  await Future.delayed(const Duration(seconds: 1), () {
     // Resume object
     match.resume();
     print('Status: ${match.status.name} at: ${match.lastTimePoint}');
   });
 
-  await Future.delayed(const Duration(milliseconds: 2), () {
+  await Future.delayed(const Duration(seconds: 2), () {
     // Mark object as ended.
     match.end();
     print('Status: ${match.status.name} at: ${match.lastTimePoint}');
