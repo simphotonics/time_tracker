@@ -23,10 +23,10 @@ For example: calling the method `end()` when the object has status
 `TimeStatus.ready` has no effect.
 
 In addition to methods for recording time points,
-the class [`TimeTracker`][TimeTracker] provides methods for json-serialization.
-It overrides the equality operator such that objects with the
-same status and the same recorded time
-points are considered equal. As such, a deserialized object will compare equal
+the mixin [`TimeTracker`][TimeTracker] provides helper methods
+for json-serialization. It is recommended that classes *with*
+[`TimeTracker`][TimeTracker] override
+the equality operator such that a deserialized object will compare equal
 to the original object.
 
 ## Usage
