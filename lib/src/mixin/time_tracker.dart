@@ -5,20 +5,17 @@ import '../extension/equal.dart';
 import '../enum/time_status.dart';
 import '../interface/time_control.dart';
 
-/// A Dart object that records time-status changes.
+/// A mixin providing methods to records time-status changes.
 /// * The object can be started, paused, resumed, and ended.
 /// * To retrieve the current state use the getter `status`.
 /// * To retrieve the recorded time points use the getter `dateTimePoints`.
 /// * To retrieve the recorded time points as microseconds since epoch use
-///   getter `timePoints`.
+///   the getter `timePoints`.
 ///   Note: Every time the objects status changes a new time point is
 ///   added.
 mixin TimeTracker implements Serializable, TimeControl {
   TimeStatus _status = TimeStatus.ready;
   final _timePoints = <int>[];
-
-  // /// Constructs a `TimeTracker` object with status `TimeStatus.ready`.
-  // TimeTracker();
 
   /// Reads a json map and sets the
   /// tracker status and time points.
