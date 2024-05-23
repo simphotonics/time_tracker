@@ -190,6 +190,6 @@ Please file feature requests and bugs at the [issue tracker].
 
 [TimeStatus]: https://pub.dev/documentation/time_tracker/latest/time_tracker/TimeStatus.html
 
-[TimeTracker]: https://pub.dev/documentation/time_tracker/latest/time_tracker/TimeTracker-class.html
+[TimeTracker]: https://pub.dev/documentation/time_tracker/latest/time_tracker/TimeTracker-mixin.html
 
 [StopWatch]: https://api.dart.dev/stable/dart-core/Stopwatch-class.html
