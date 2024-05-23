@@ -5,7 +5,7 @@ void main() async {
   /// Create object (start time is recorded)
   final match = TennisMatch(['Tim', 'Andy'])..start();
 
-  print('----- Create object of type TennisMatch -----');
+  print('----- Create an object of type TennisMatch -----');
   print('Status: ${match.status.name} at: ${match.startTime}');
 
   await Future.delayed(const Duration(milliseconds: 3), () {

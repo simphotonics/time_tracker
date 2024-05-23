@@ -98,12 +98,13 @@ class TennisMatch with TimeTracker {
 The program below demonstrates how to use an object of type `TennisMatch` to
 start, pause, resume, and end the match. It also shows how to serialize and
 deserialize the object using ['dart:convert'][dart:convert].
-```
+
+```Dart
 void main() async {
   /// Create object (start time is recorded)
   final match = TennisMatch(['Tim', 'Andy'])..start();
 
-  print('----- Create object of type TennisMatch -----');
+  print('----- Create an object of type TennisMatch -----');
   print('Status: ${match.status.name} at: ${match.startTime}');
 
   await Future.delayed(const Duration(milliseconds: 3), () {
@@ -144,7 +145,7 @@ void main() async {
 
 ```Console
 $ dart example/bin/time_tracker_example.dart
------ Create object of type TennisMatch -----
+----- Create an object of type TennisMatch -----
 Status: started at: 2024-05-23 18:30:06.167586
 Status: paused at: 2024-05-23 18:30:06.176602
 Status: resumed at: 2024-05-23 18:30:06.180479
