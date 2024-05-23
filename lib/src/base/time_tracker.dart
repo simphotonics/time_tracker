@@ -1,11 +1,12 @@
-import '../src/extensions/equal.dart';
+import '../extensions/equal.dart';
+import '../enum/time_status.dart';
 
 /// Interface adding the method `toJson()`.
-abstract class Serializable {
+abstract interface class Serializable {
   Map<String, dynamic> toJson();
 }
 
-abstract class TimeControls {
+abstract interface class TimeControls {
   /// Starts the objects time line. Records the first time point.
   void start();
 
@@ -19,34 +20,6 @@ abstract class TimeControls {
 
   /// Ends the objects time line. Records the last time point.
   void end();
-}
-
-/// Enumeration representing the time status of an object.
-enum TimeStatus implements Serializable {
-  /// The object has not been started yet.
-  ready,
-
-  /// The object has been started.
-  started,
-
-  /// The object has been paused.
-  paused,
-
-  /// The object was paused and has been resumed.
-  resumed,
-
-  /// The time line of the object has ended.
-  ended;
-
-  const TimeStatus();
-
-  /// Reads json map and returns the corresponding instance of `TimeStatus`.
-  factory TimeStatus.fromJson(Map<String, dynamic> json) =>
-      TimeStatus.values[json['timeStatus'] as int];
-
-  /// Returns an json map representing the instance of `TimeStatus`.
-  @override
-  Map<String, dynamic> toJson() => {'timeStatus': index};
 }
 
 /// A Dart object that records time-status changes.

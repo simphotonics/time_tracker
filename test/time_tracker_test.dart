@@ -1,5 +1,5 @@
-import 'package:time_tracker/src/time_tracker.dart';
 import 'package:test/test.dart';
+import 'package:time_tracker/time_tracker.dart';
 
 class HasStatus<T extends TimeTracker> extends CustomMatcher {
   HasStatus(matcher) : super("TimeTracker with status:", "status", matcher);

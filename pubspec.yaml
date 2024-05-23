@@ -3,13 +3,16 @@ name: time_tracker
 description: A Dart object that records time-status changes and can be started,
   paused, resumed, and ended.
 
-version: 1.0.1
+version: 1.1.0
 
 homepage: https://github.com/simphotonics/time_tracker
 
 environment:
-  sdk: ">=2.19.2 <3.0.0"
+  sdk: ^3.0.0
+  
+dependencies:
+  serialize_enum: ^0.1.0
 
 dev_dependencies:
-  lints: ^2.0.1
-  test: ^1.23.1
+  lints: ^4.0.0
+  test: ^1.25.5
