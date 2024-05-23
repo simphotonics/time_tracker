@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:test/test.dart';
 import 'package:time_tracker/time_tracker.dart';
 
+import 'src/tennis_match.dart';
+
+// Matchers
 class HasStatus<T extends TimeTracker> extends CustomMatcher {
   HasStatus(matcher) : super("TimeTracker with status:", "status", matcher);
   @override
@@ -22,238 +27,270 @@ class HasPausesLargerZero<T extends TimeTracker> extends CustomMatcher {
 void main() {
   group('Constructors:', () {
     test('default', () {
-      final tracker = TimeTracker();
-      expect(tracker, HasStatus(TimeStatus.ready));
-    });
-    test('startNow', () {
-      final tracker = TimeTracker.startNow();
-      expect(tracker, HasStatus(TimeStatus.started));
-      expect(tracker.timePoints, hasLength(1));
+      final tennisMatch = TennisMatch(['Tim', 'Andy']);
+      expect(tennisMatch, HasStatus(TimeStatus.ready));
     });
   });
 
   group('Transitions:', () {
     test('ready -> started', () {
-      final tracker = TimeTracker()..start();
-      expect(tracker, HasStatus(TimeStatus.started));
-      expect(tracker.timePoints, hasLength(1));
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])..start();
+      expect(tennisMatch, HasStatus(TimeStatus.started));
+      expect(tennisMatch.timePoints, hasLength(1));
     });
     test('started -> paused', () {
-      final tracker = TimeTracker.startNow()..pause();
-      tracker.pause();
-      expect(tracker, HasStatus(TimeStatus.paused));
-      expect(tracker.timePoints, hasLength(2));
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])..start();
+      tennisMatch.pause();
+      expect(tennisMatch, HasStatus(TimeStatus.paused));
+      expect(tennisMatch.timePoints, hasLength(2));
     });
     test('started -> ended', () {
-      final tracker = TimeTracker.startNow()..end();
-      expect(tracker, HasStatus(TimeStatus.ended));
-      expect(tracker.timePoints, hasLength(2));
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
+        ..end();
+      expect(tennisMatch, HasStatus(TimeStatus.ended));
+      expect(tennisMatch.timePoints, hasLength(2));
     });
     test('paused -> resumed', () {
-      final tracker = TimeTracker.startNow()
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
         ..pause()
         ..resume();
-      expect(tracker, HasStatus(TimeStatus.resumed));
-      expect(tracker.timePoints, hasLength(3));
+      expect(tennisMatch, HasStatus(TimeStatus.resumed));
+      expect(tennisMatch.timePoints, hasLength(3));
     });
     test('paused -> ended', () {
-      final tracker = TimeTracker.startNow()
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
         ..pause()
         ..end();
-      expect(tracker.timePoints, hasLength(3));
-      expect(tracker, HasStatus(TimeStatus.ended));
+      expect(tennisMatch.timePoints, hasLength(3));
+      expect(tennisMatch, HasStatus(TimeStatus.ended));
     });
     test('resumed -> paused', () {
-      final tracker = TimeTracker.startNow()
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
         ..pause()
         ..resume();
-      expect(tracker, HasStatus(TimeStatus.resumed));
-      expect(tracker.timePoints, hasLength(3));
+      expect(tennisMatch, HasStatus(TimeStatus.resumed));
+      expect(tennisMatch.timePoints, hasLength(3));
     });
     test('resumed -> ended', () {
-      final tracker = TimeTracker.startNow()
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
         ..pause()
         ..resume()
         ..end();
-      expect(tracker, HasStatus(TimeStatus.ended));
-      expect(tracker.timePoints, hasLength(4));
+      expect(tennisMatch, HasStatus(TimeStatus.ended));
+      expect(tennisMatch.timePoints, hasLength(4));
     });
   });
 
   group('Void Transitions:', () {
     test('ready -> paused', () {
-      final tracker = TimeTracker()..pause();
-      expect(tracker, HasStatus(TimeStatus.ready));
-      expect(tracker.timePoints, hasLength(0));
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])..pause();
+      expect(tennisMatch, HasStatus(TimeStatus.ready));
+      expect(tennisMatch.timePoints, hasLength(0));
     });
     test('ready -> resumed', () {
-      final tracker = TimeTracker()..resume();
-      expect(tracker, HasStatus(TimeStatus.ready));
-      expect(tracker.timePoints, hasLength(0));
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])..resume();
+      expect(tennisMatch, HasStatus(TimeStatus.ready));
+      expect(tennisMatch.timePoints, hasLength(0));
     });
     test('ready -> ended', () {
-      final tracker = TimeTracker()..end();
-      expect(tracker, HasStatus(TimeStatus.ready));
-      expect(tracker.timePoints, hasLength(0));
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])..end();
+      expect(tennisMatch, HasStatus(TimeStatus.ready));
+      expect(tennisMatch.timePoints, hasLength(0));
     });
     test('started -> resumed', () {
-      final tracker = TimeTracker.startNow()..resume();
-      expect(tracker, HasStatus(TimeStatus.started));
-      expect(tracker.timePoints, hasLength(1));
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
+        ..resume();
+      expect(tennisMatch, HasStatus(TimeStatus.started));
+      expect(tennisMatch.timePoints, hasLength(1));
     });
     test('started -> started', () {
-      final tracker = TimeTracker.startNow()..start();
-      expect(tracker, HasStatus(TimeStatus.started));
-      expect(tracker.timePoints, hasLength(1));
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
+        ..start();
+      expect(tennisMatch, HasStatus(TimeStatus.started));
+      expect(tennisMatch.timePoints, hasLength(1));
     });
     test('paused -> started', () {
-      final tracker = TimeTracker.startNow()
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
         ..pause()
         ..start();
-      expect(tracker.timePoints, hasLength(2));
-      expect(tracker, HasStatus(TimeStatus.paused));
+      expect(tennisMatch.timePoints, hasLength(2));
+      expect(tennisMatch, HasStatus(TimeStatus.paused));
     });
     test('paused -> paused', () {
-      final tracker = TimeTracker.startNow()
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
         ..pause()
         ..pause();
-      expect(tracker.timePoints, hasLength(2));
-      expect(tracker, HasStatus(TimeStatus.paused));
+      expect(tennisMatch.timePoints, hasLength(2));
+      expect(tennisMatch, HasStatus(TimeStatus.paused));
     });
     test('resumed -> started', () {
-      final tracker = TimeTracker.startNow()
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
         ..pause()
         ..resume()
         ..start();
-      expect(tracker, HasStatus(TimeStatus.resumed));
-      expect(tracker.timePoints, hasLength(3));
+      expect(tennisMatch, HasStatus(TimeStatus.resumed));
+      expect(tennisMatch.timePoints, hasLength(3));
     });
     test('resumed -> resumed', () {
-      final tracker = TimeTracker.startNow()
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
         ..pause()
         ..resume()
         ..resume();
-      expect(tracker, HasStatus(TimeStatus.resumed));
-      expect(tracker.timePoints, hasLength(3));
+      expect(tennisMatch, HasStatus(TimeStatus.resumed));
+      expect(tennisMatch.timePoints, hasLength(3));
     });
     test('ended -> started', () {
-      final tracker = TimeTracker.startNow()
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
         ..end()
         ..start();
-      expect(tracker, HasStatus(TimeStatus.ended));
-      expect(tracker.timePoints, hasLength(2));
+      expect(tennisMatch, HasStatus(TimeStatus.ended));
+      expect(tennisMatch.timePoints, hasLength(2));
     });
     test('ended -> paused', () {
-      final tracker = TimeTracker.startNow()
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
         ..end()
         ..pause();
-      expect(tracker, HasStatus(TimeStatus.ended));
-      expect(tracker.timePoints, hasLength(2));
+      expect(tennisMatch, HasStatus(TimeStatus.ended));
+      expect(tennisMatch.timePoints, hasLength(2));
     });
     test('ended -> resumed', () {
-      final tracker = TimeTracker.startNow()
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
         ..end()
         ..resume();
-      expect(tracker, HasStatus(TimeStatus.ended));
-      expect(tracker.timePoints, hasLength(2));
+      expect(tennisMatch, HasStatus(TimeStatus.ended));
+      expect(tennisMatch.timePoints, hasLength(2));
     });
     test('ended -> ended', () {
-      final tracker = TimeTracker.startNow()
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
         ..end()
         ..end();
-      expect(tracker, HasStatus(TimeStatus.ended));
-      expect(tracker.timePoints, hasLength(2));
+      expect(tennisMatch, HasStatus(TimeStatus.ended));
+      expect(tennisMatch.timePoints, hasLength(2));
     });
   });
 
   group('Time Points:', () {
     test('startTime ready', () {
-      final tracker = TimeTracker();
-      expect(tracker.startTime, isNull);
-      expect(tracker.endTime, isNull);
+      final tennisMatch = TennisMatch(['Tim', 'Andy']);
+      expect(tennisMatch.startTime, isNull);
+      expect(tennisMatch.endTime, isNull);
     });
     test('startTime started', () {
-      final tracker = TimeTracker.startNow();
-      expect(tracker.startTime, isNotNull);
-      expect(tracker.endTime, isNull);
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])..start();
+      expect(tennisMatch.startTime, isNotNull);
+      expect(tennisMatch.endTime, isNull);
     });
     test('startTime paused', () {
-      final tracker = TimeTracker.startNow()..pause();
-      expect(tracker.startTime, isNotNull);
-      expect(tracker.endTime, isNull);
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
+        ..pause();
+      expect(tennisMatch.startTime, isNotNull);
+      expect(tennisMatch.endTime, isNull);
     });
     test('startTime paused', () {
-      final tracker = TimeTracker.startNow()
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
         ..pause()
         ..resume();
-      expect(tracker.startTime, isNotNull);
-      expect(tracker.endTime, isNull);
+      expect(tennisMatch.startTime, isNotNull);
+      expect(tennisMatch.endTime, isNull);
     });
     test('startTime paused', () {
-      final tracker = TimeTracker.startNow()
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
         ..pause()
         ..resume()
         ..end();
-      expect(tracker.startTime, isNotNull);
-      expect(tracker.endTime, isNotNull);
+      expect(tennisMatch.startTime, isNotNull);
+      expect(tennisMatch.endTime, isNotNull);
     });
   });
 
   group('Duration:', () {
     test('ready', () {
-      final tracker = TimeTracker();
-      expect(tracker.duration, Duration.zero);
-      expect(tracker.durationOfPauses, Duration.zero);
+      final tennisMatch = TennisMatch(['Tim', 'Andy']);
+      expect(tennisMatch.duration, Duration.zero);
+      expect(tennisMatch.durationOfPauses, Duration.zero);
     });
     test('started', () {
-      final tracker = TimeTracker()..start();
-      expect(tracker, HasDurationLargerZero());
-      expect(tracker.durationOfPauses, Duration.zero);
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])..start();
+      expect(tennisMatch, HasDurationLargerZero());
+      expect(tennisMatch.durationOfPauses, Duration.zero);
     });
 
     test('paused', () {
-      final tracker = TimeTracker.startNow()..pause();
-      expect(tracker, HasDurationLargerZero());
-      expect(tracker, HasPausesLargerZero());
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
+        ..pause();
+      expect(tennisMatch, HasDurationLargerZero());
+      expect(tennisMatch, HasPausesLargerZero());
     });
     test('end', () {
-      final tracker = TimeTracker.startNow()
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
         ..pause()
         ..resume()
         ..end();
-      expect(tracker, HasDurationLargerZero());
-      expect(tracker, HasPausesLargerZero());
-      final totalTime = tracker.endTime!.difference(tracker.startTime!);
-      expect(totalTime, tracker.duration + tracker.durationOfPauses);
+      expect(tennisMatch, HasDurationLargerZero());
+      expect(tennisMatch, HasPausesLargerZero());
+      final totalTime = tennisMatch.endTime!.difference(tennisMatch.startTime!);
+      expect(totalTime, tennisMatch.duration + tennisMatch.durationOfPauses);
     });
   });
   group('Serialize:', () {
     test('json', () {
-      final tracker = TimeTracker()
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
         ..start()
         ..pause()
         ..resume()
         ..end();
 
-      final json = tracker.toJson();
-      expect(tracker.status.toJson(), json[TimeTracker.$status]);
-      expect(tracker.timePoints, json[TimeTracker.$timePoints]);
+      final json = tennisMatch.toJson();
+      expect(tennisMatch.status.toJson(), json[TimeTracker.$status]);
+      expect(tennisMatch.timePoints, json[TimeTracker.$timePoints]);
     });
   });
 
   group('Deserialize:', () {
-    test('json', () {
-      final tracker = TimeTracker()
+    test('json from map', () {
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
         ..start()
         ..pause()
         ..resume()
         ..end();
 
-      final json = tracker.toJson();
+      final json = tennisMatch.toJson();
+      final revivedTennisMatch = TennisMatch.fromJson(json);
+      expect(tennisMatch, revivedTennisMatch);
+    });
+    test('json from String', () {
+      final tennisMatch = TennisMatch(['Tim', 'Andy'])
+        ..start()
+        ..pause()
+        ..resume()
+        ..end();
 
-      final revivedTracker = TimeTracker.fromJson(json);
-      expect(tracker, revivedTracker);
+      final json = tennisMatch.toJson();
+      final jsonString = jsonEncode(json);
+      final jsonDecoded = jsonDecode(jsonString);
+
+      expect(json, jsonDecoded);
+      expect(tennisMatch, TennisMatch.fromJson(jsonDecoded));
     });
   });
-  group('Equality', () {});
 }

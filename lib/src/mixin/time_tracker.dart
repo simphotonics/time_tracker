@@ -1,26 +1,9 @@
-import '../extensions/equal.dart';
+import 'package:exception_templates/exception_templates.dart';
+import 'package:serialize_enum/serialize_enum.dart' show Json, Serializable;
+
+import '../extension/equal.dart';
 import '../enum/time_status.dart';
-
-/// Interface adding the method `toJson()`.
-abstract interface class Serializable {
-  Map<String, dynamic> toJson();
-}
-
-abstract interface class TimeControls {
-  /// Starts the objects time line. Records the first time point.
-  void start();
-
-  /// Pauses the objects time line. Adds a time point
-  /// indicating the start of a pause.
-  void pause();
-
-  /// Resumes a paused object. Adds a time point,
-  /// indicating the end of a pause.
-  void resume();
-
-  /// Ends the objects time line. Records the last time point.
-  void end();
-}
+import '../interface/time_control.dart';
 
 /// A Dart object that records time-status changes.
 /// * The object can be started, paused, resumed, and ended.
@@ -30,31 +13,31 @@ abstract interface class TimeControls {
 ///   getter `timePoints`.
 ///   Note: Every time the objects status changes a new time point is
 ///   added.
-class TimeTracker implements Serializable, TimeControls {
+mixin TimeTracker implements Serializable, TimeControl {
   TimeStatus _status = TimeStatus.ready;
   final _timePoints = <int>[];
 
-  /// Constructs a `TimeTracker` object with status `TimeStatus.ready`.
-  TimeTracker();
+  // /// Constructs a `TimeTracker` object with status `TimeStatus.ready`.
+  // TimeTracker();
 
-  /// Constructs a `TimeTracker` object with status `TimeStatus.started`.
-  /// Note: The instantiation time is the first time point recorded
-  /// in `timePoints`.
-  TimeTracker.startNow() {
-    _timePoints.add(DateTime.now().microsecondsSinceEpoch);
-    _status = TimeStatus.started;
+  /// Reads a json map and sets the
+  /// tracker status and time points.
+  void initTrackerfromJson(Json json) {
+    if (json case {$status: Json jsonStatus, $timePoints: List timePoints}) {
+      _status = TimeStatus.fromJson(jsonStatus);
+      _timePoints.addAll(timePoints.cast<int>());
+    } else {
+      throw ErrorOf<TimeTracker>(
+        message: 'Json validation error',
+        expectedState: 'A json map with keys {${$status},{${$timePoints}}',
+        invalidState: 'Found map: $json',
+      );
+    }
   }
 
-  /// Constructs a `TimeTracker` object from a json map
-  /// (typically generated from a decoded json String.)
-  TimeTracker.fromJson(Map<String, dynamic> json)
-      : _status = TimeStatus.fromJson(json[$status]) {
-    _timePoints.addAll(json[$timePoints].cast<int>());
-  }
-
-  /// Returns a json-encodable map representing this.
-  @override
-  Map<String, dynamic> toJson() => <String, dynamic>{
+  /// Returns a json-encodable map representing the current
+  /// [TimeTracker] status and the stored time points.
+  Json trackerToJson() => <String, dynamic>{
         $status: _status.toJson(),
         $timePoints: List.of(_timePoints, growable: false)
       };
@@ -191,25 +174,22 @@ class TimeTracker implements Serializable, TimeControls {
   TimeStatus get status => _status;
 
   /// Json key for the variable `timePoints`..
-  static final String $timePoints = 'timePoints';
+  static const String $timePoints = '_timePoints';
 
   /// Json key for the variable `status`.
-  static final String $status = 'status';
+  static const String $status = '_status';
 
-  @override
-  int get hashCode => Object.hash(_status, _timePoints);
+  int get trackerHashCode => Object.hash(_status, _timePoints);
 
   /// Returns `true` if the two instances have the same time status and
   /// the same time points.
-  @override
-  bool operator ==(Object other) {
+  bool trackerEqual(Object other) {
     return other is TimeTracker &&
         other._status == _status &&
         other._timePoints.equal(_timePoints);
   }
 
-  @override
-  String toString() {
-    return 'TimeTrackable: status = ${status.name}';
+  String trackerToString() {
+    return 'status: ${status.name}';
   }
 }

@@ -34,87 +34,95 @@ to the original object.
 To use this library include [`time_tracker`][time_tracker]
 as a dependency in your pubspec.yaml file.
 
-The example below shows how to construct an object of type `TennisMatch` which
-extends `TimeTracker`. With this configuration the object records its own time
-points. Note: An alternative to extension would be composition. In that case,
-an instance of `TimeTracker` could be stored as a class variable.
-
+The example below shows how to construct an object of type `TennisMatch` with
+the mixin `TimeTracker`. The object records its own time
+points. Note: The getter `hashCode` and the equality operator are overriden
+so that decoded objects are equal to the original object.
 
 ```Dart
-import 'dart:convert';
-
+import 'package:exception_templates/exception_templates.dart';
 import 'package:time_tracker/time_tracker.dart';
 
-/// Demonstrates how to extend TimeTracker.
-class TennisMatch extends TimeTracker implements Serializable {
-  final players = <String>[];
+/// Demonstrates how to use TimeTracker.
+class TennisMatch with TimeTracker {
+  final _players = <String>[];
 
-  /// Note the use of the constructor `super.startNow()`.
-  /// This creates an instance of TennisMatch with status: started
-  /// and records the instantiation time as the first time point.
-  TennisMatch(List<String> players) : super.startNow() {
-    this.players.addAll(players);
+  TennisMatch(List<String> players) {
+    _players.addAll(players);
   }
 
   /// Constructs an object from a json map.
-  TennisMatch.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
-    players.addAll(json['players'].cast<String>());
+  TennisMatch.fromJson(Map<String, dynamic> json) {
+    if (json case {'players': List players}) {
+      _players.addAll(players.cast<String>());
+
+      // Uses the entries of json to initialize the time tracker state.
+      initTrackerfromJson(json);
+    } else {
+      throw ErrorOf<TennisMatch>(
+        message: 'Error validating list of players.',
+        invalidState: ' Found map: $json',
+      );
+    }
   }
 
-  /// Converts an object to a json map.
   @override
   Map<String, dynamic> toJson() {
-    final json = super.toJson();
-    json['players'] = List<String>.of(players);
+
+    // Adds the map entries related to the time tracker.
+    final json = trackerToJson();
+    json['players'] = List<String>.of(_players);
     return json;
   }
 
   @override
-  int get hashCode => Object.hash(super.hashCode, players);
+  int get hashCode => Object.hash(trackerHashCode, _players);
 
   /// Returns `true` if the two instances have the same time status,
   /// time points, and player list.
   @override
   bool operator ==(Object other) {
     return other is TennisMatch &&
-        other.players.equal(players) &&
-        other.timePoints.equal(timePoints) &&
-        other.status == status;
+        _players.equal(other._players) &&
+        trackerEqual(other);
   }
 
   @override
   String toString() {
-    return 'Match: players: $players | status: ${status.name} '
+    return 'TennisMatch: players: $_players | status: ${status.name} '
         '| duration: $duration';
   }
 }
+```
 
-void main(List<String> arguments) async {
+The program below demonstrates how to use an object of type `TennisMatch` to
+start, pause, resume, and end the match. It also shows how to serialize and
+deserialize the object using ['dart:convert'][dart:convert].
+```
+void main() async {
   /// Create object (start time is recorded)
-  final match = TennisMatch(['Tim', 'Andy']);
+  final match = TennisMatch(['Tim', 'Andy'])..start();
 
-  print('----- Create object of type Match -----');
+  print('----- Create object of type TennisMatch -----');
   print('Status: ${match.status.name} at: ${match.startTime}');
 
-  await Future.delayed(const Duration(seconds: 3), () {
+  await Future.delayed(const Duration(milliseconds: 3), () {
     // Pause object
     match.pause();
     print('Status: ${match.status.name} at: ${match.lastTimePoint}');
   });
 
-  await Future.delayed(const Duration(seconds: 1), () {
+  await Future.delayed(const Duration(milliseconds: 1), () {
     // Resume object
     match.resume();
     print('Status: ${match.status.name} at: ${match.lastTimePoint}');
   });
 
-  await Future.delayed(const Duration(seconds: 2), () {
+  await Future.delayed(const Duration(milliseconds: 2), () {
     // Mark object as ended.
     match.end();
     print('Status: ${match.status.name} at: ${match.lastTimePoint}');
   });
-
-  print(match);
 
   print('');
   print('---------- Json Encoding -------------');
@@ -130,31 +138,34 @@ void main(List<String> arguments) async {
   print('');
   print('match == decodedMatch: ${match == decodedMatch}');
 }
-
 ```
 
 <details> <summary> Click to show the console output. </summary>
 
 ```Console
 $ dart example/bin/time_tracker_example.dart
-
 ----- Create object of type TennisMatch -----
-Status: started at: 2023-02-21 13:13:18.356681
-Status: paused at: 2023-02-21 13:13:21.369724
-Status: resumed at: 2023-02-21 13:13:22.374468
-Status: ended at: 2023-02-21 13:13:24.377429
-Match: players: [Tim, Andy] | status: ended | duration: 0:00:05.016004
+Status: started at: 2024-05-23 18:30:06.167586
+Status: paused at: 2024-05-23 18:30:06.176602
+Status: resumed at: 2024-05-23 18:30:06.180479
+Status: ended at: 2024-05-23 18:30:06.183586
 
 ---------- Json Encoding -------------
 Serialized object:
-{"status":{"timeStatus":4},"timePoints":[1676985198356681,1676985201369724,1676985202374468,1676985204377429],"players":["Tim","Andy"]}
+{"_status":{"timeStatus":"ended"},
+ "_timePoints":[
+   1716485406167586,
+   1716485406176602,
+   1716485406180479,
+   1716485406183586,
+ ],
+ "players":["Tim","Andy"],
+}
 
 Deserialized object:
-TennisMatch: players: [Tim, Andy] | status: ended | duration: 0:00:05.016004
+TennisMatch: players: [Tim, Andy] | status: ended | duration: 0:00:00.012123
 
 match == decodedMatch: true
-
-$
 ```
 </details>
 
@@ -167,6 +178,8 @@ The source code of the program shown above can be found in the folder [example].
 Please file feature requests and bugs at the [issue tracker].
 
 [issue tracker]: https://github.com/simphotonics/time_tracker/issues
+
+[dart:convert]: https://api.dart.dev/stable/dart-convert/dart-convert-library.html
 
 [DateTime]: https://api.dart.dev/stable/dart-core/DateTime-class.html
 
