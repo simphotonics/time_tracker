@@ -17,27 +17,43 @@ mixin TimeTracker implements Serializable, TimeControl {
   TimeStatus _status = TimeStatus.ready;
   final _timePoints = <int>[];
 
-  /// Reads a json map and sets the
+  /// Reads a json map and initializes the
   /// tracker status and time points.
-  void initTrackerfromJson(Json json) {
+  /// * If the status provided is [Timestatus.ready]
+  /// any time points will be ignored to maintain consistency.
+  /// * If validation fails and [readyOnValidationError] is `true`,
+  /// the tracker will be initialized with a status of
+  /// [TimeStatus.ready].
+  /// * If validation fails and [readyOnValidationError] is `false` an
+  /// error of type [ErrorOf] with type parameter [TimeTracker] will be thrown.
+  void initTrackerfromJson(Json json, {bool readyOnValidationError = false}) {
     if (json case {$status: Json jsonStatus, $timePoints: List timePoints}) {
       _status = TimeStatus.fromJson(jsonStatus);
-      _timePoints.addAll(timePoints.cast<int>());
+      _timePoints.clear();
+
+      if (_status.isOtherThanReady) {
+        _timePoints.addAll(timePoints.cast<int>());
+      }
     } else {
-      throw ErrorOf<TimeTracker>(
-        message: 'Json validation error',
-        expectedState: 'A json map with keys {${$status},{${$timePoints}}',
-        invalidState: 'Found map: $json',
-      );
+      if (readyOnValidationError) {
+        _timePoints.clear();
+        _status = TimeStatus.ready;
+      } else {
+        throw ErrorOf<TimeTracker>(
+          message: 'Json validation error',
+          expectedState: 'A json map with keys: $status,$timePoints',
+          invalidState: 'Found map: $json',
+        );
+      }
     }
   }
 
   /// Returns a json-encodable map representing the current
   /// [TimeTracker] status and the stored time points.
-  Json trackerToJson() => <String, dynamic>{
-        $status: _status.toJson(),
-        $timePoints: List.of(_timePoints, growable: false)
-      };
+  Json trackerToJson() => <String, Object?>{
+    $status: _status.toJson(),
+    $timePoints: List.unmodifiable(_timePoints),
+  };
 
   /// Sets the time status of the object to `TimeStatus.started`
   /// if the current time status is `TimeStatus.ready`.
@@ -146,7 +162,7 @@ mixin TimeTracker implements Serializable, TimeControl {
   /// * Subsequent points mark the start/end of a pause.
   /// * The last entry marks the completion time of the object if the object
   ///   status is `TimeStatus.ended`.
-  List<int> get timePoints => [..._timePoints];
+  List<int> get timePoints => List.unmodifiable(_timePoints);
 
   /// Returns the start time of the object or `null` if the tracker was
   /// not started yet.
@@ -171,10 +187,10 @@ mixin TimeTracker implements Serializable, TimeControl {
   TimeStatus get status => _status;
 
   /// Json key for the variable `timePoints`..
-  static const String $timePoints = '_timePoints';
+  static const String $timePoints = 'timePoints';
 
   /// Json key for the variable `status`.
-  static const String $status = '_status';
+  static const String $status = 'status';
 
   int get trackerHashCode => Object.hash(_status, _timePoints);
 
@@ -189,4 +205,44 @@ mixin TimeTracker implements Serializable, TimeControl {
   String trackerToString() {
     return 'status: ${status.name}';
   }
+
+  /// Returns `true` the current status is [TimeStatus.ready]
+  /// and false otherwise.
+  bool get isReady => _status.isReady;
+
+  /// Returns `true` if the current status is not [TimeStatus.ready]
+  /// and false otherwise.
+  bool get isOtherThanReady => _status.isOtherThanReady;
+
+  /// Returns `true` if the current status is [TimeStatus.started]
+  /// and false otherwise.
+  bool get hasStarted => _status.hasStarted;
+
+  /// Returns `true` if the current status is not [TimeStatus.started]
+  /// and false otherwise.
+  bool get hasNotStarted => _status.hasNotStarted;
+
+  /// Returns `true` if the current status is [TimeStatus.paused]
+  /// and false otherwise.
+  bool get isPaused => _status.isPaused;
+
+  /// Returns `true` if the current status is not [TimeStatus.paused]
+  /// and false otherwise.
+  bool get isNotPaused => _status.isNotPaused;
+
+  /// Returns `true` is the current status is [TimeStatus.resumed]
+  /// and false otherwise.
+  bool get hasResumed => _status.hasResumed;
+
+  /// Returns `true` if the current status is not [TimeStatus.resumed]
+  /// and false otherwise.
+  bool get hasNotResumed => _status.hasNotResumed;
+
+  /// Returns `true` is the current status is [TimeStatus.ended]
+  /// and false otherwise.
+  bool get hasEnded => _status.hasEnded;
+
+  /// Returns `true` if the current status is not [TimeStatus.ended]
+  /// and false otherwise.
+  bool get hasNotEnded => _status.hasNotEnded;
 }

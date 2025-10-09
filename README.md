@@ -34,10 +34,10 @@ to the original object.
 To use this library include [`time_tracker`][time_tracker]
 as a dependency in your pubspec.yaml file.
 
-The example below shows how to construct an object of type `TennisMatch` with
+The example below shows how to construct an object of type `TennisMatch` *with*
 the mixin `TimeTracker`. The object records its own time
 points. Note: The getter `hashCode` and the equality operator are overriden
-so that decoded objects are equal to the original object.
+so that decoded objects are equal when compared with the original object.
 
 ```Dart
 import 'package:exception_templates/exception_templates.dart';
@@ -45,51 +45,50 @@ import 'package:time_tracker/time_tracker.dart';
 
 /// Demonstrates how to use TimeTracker.
 class TennisMatch with TimeTracker {
-  final _players = <String>[];
+  final List<String> players;
 
-  TennisMatch(List<String> players) {
-    _players.addAll(players);
-  }
+  /// Note the use of the constructor `super.startNow()`.
+  /// This creates an instance of TennisMatch with status: started
+  /// and records the instantiation time as the first time point.
+  TennisMatch(List<String> players) : players = List.of(players);
 
   /// Constructs an object from a json map.
-  TennisMatch.fromJson(Map<String, dynamic> json) {
+  factory TennisMatch.fromJson(Map<String, Object?> json) {
     if (json case {'players': List players}) {
-      _players.addAll(players.cast<String>());
-
-      // Uses the entries of json to initialize the time tracker state.
-      initTrackerfromJson(json);
+      // Use `initTrackerfromJson` to initializer the time tracker.
+      return TennisMatch(players.cast<String>())..initTrackerfromJson(json);
     } else {
       throw ErrorOf<TennisMatch>(
-        message: 'Error validating list of players.',
+        message: 'Error in TennisMatch.fromJson',
         invalidState: ' Found map: $json',
       );
     }
   }
 
   @override
-  Map<String, dynamic> toJson() {
-
-    // Adds the map entries related to the time tracker.
+  Map<String, Object?> toJson() {
+    // Providing the entries related to the time tracker.
     final json = trackerToJson();
-    json['players'] = List<String>.of(_players);
+    // Adding the rest of the entries.
+    json['players'] = players;
     return json;
   }
 
   @override
-  int get hashCode => Object.hash(trackerHashCode, _players);
+  int get hashCode => Object.hash(trackerHashCode, players);
 
   /// Returns `true` if the two instances have the same time status,
   /// time points, and player list.
   @override
   bool operator ==(Object other) {
     return other is TennisMatch &&
-        _players.equal(other._players) &&
+        players.equal(other.players) &&
         trackerEqual(other);
   }
 
   @override
   String toString() {
-    return 'TennisMatch: players: $_players | status: ${status.name} '
+    return 'TennisMatch: players: $players | status: ${status.name} '
         '| duration: $duration';
   }
 }
@@ -102,11 +101,12 @@ deserialize the object using ['dart:convert'][dart:convert].
 ```Dart
 void main() async {
   /// Create object (start time is recorded)
-  final match = TennisMatch(['Tim', 'Andy'])..start();
-
+  final match = TennisMatch(['Tim', 'Andy']);
   print('----- Create an object of type TennisMatch -----');
-  print('Status: ${match.status.name} at: ${match.startTime}');
+  print(match);
+  match.start();
 
+  print('Status: ${match.status.name} at: ${match.startTime}');
   await Future.delayed(const Duration(milliseconds: 3), () {
     // Pause object
     match.pause();

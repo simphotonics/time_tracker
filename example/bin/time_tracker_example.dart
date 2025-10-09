@@ -3,10 +3,12 @@ import '../../test/src/tennis_match.dart';
 
 void main() async {
   /// Create object (start time is recorded)
-  final match = TennisMatch(['Tim', 'Andy'])..start();
-
   print('----- Create an object of type TennisMatch -----');
-  print('Status: ${match.status.name} at: ${match.startTime}');
+  final match = TennisMatch(['Tim', 'Andy']);
+  print(match);
+  match.start();
+
+  print('\nStatus: ${match.status.name} at: ${match.startTime}');
 
   await Future.delayed(const Duration(seconds: 3), () {
     // Pause object

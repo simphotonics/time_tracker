@@ -7,7 +7,8 @@ import 'src/tennis_match.dart';
 
 // Matchers
 class HasStatus<T extends TimeTracker> extends CustomMatcher {
-  HasStatus(matcher) : super("TimeTracker with status:", "status", matcher);
+  HasStatus(TimeStatus matcher)
+    : super("TimeTracker with status:", "status", matcher);
   @override
   featureValueOf(actual) => (actual as T).status;
 }

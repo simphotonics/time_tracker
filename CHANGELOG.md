@@ -1,3 +1,8 @@
+## 1.1.1
+- Updated dependencies.
+- Added additional getters to enum `TimeStatus` and mixin `TimeTracker`.
+- Simplified example. 
+
 ## 1.1.0
 - Require Dart ^3.0.0
 - `TimeTracker` is now a mixin.
