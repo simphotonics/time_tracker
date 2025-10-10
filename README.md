@@ -6,7 +6,7 @@
 
 A commonly required task consists in recording the time a process *starts*, is *paused/resumed*,
 and the time it
-is *completed*. The mixin [`TimeTracker`][TimeTracker] is designed
+has *ended*. The mixin [`TimeTracker`][TimeTracker] is designed
 to perform this job. Its methods provide similar functionality to
 a [`StopWatch`][StopWatch],
 however instead of elapsed ticks it records a [`DateTime`][DateTime] point
