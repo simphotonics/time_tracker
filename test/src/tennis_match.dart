@@ -5,9 +5,6 @@ import 'package:time_tracker/time_tracker.dart';
 class TennisMatch with TimeTracker {
   final List<String> players;
 
-  /// Note the use of the constructor `super.startNow()`.
-  /// This creates an instance of TennisMatch with status: started
-  /// and records the instantiation time as the first time point.
   TennisMatch(List<String> players) : players = List.unmodifiable(players);
 
   /// Constructs an object from a json map.

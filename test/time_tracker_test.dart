@@ -339,11 +339,10 @@ void main() {
           ),
         ),
       );
-
     });
     test('failed init in state started', () {
       expect(
-        () => matchFactory(status: started, timePoints: [0, 1000,]),
+        () => matchFactory(status: started, timePoints: [0, 1000]),
         throwsA(
           isA<ErrorOf<TimeTracker>>().having(
             (e) => e.message,
