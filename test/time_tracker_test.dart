@@ -1,55 +1,53 @@
 import 'dart:convert';
 
+import 'package:exception_templates/exception_templates.dart' show ErrorOf;
 import 'package:test/test.dart';
 import 'package:time_tracker/time_tracker.dart';
 
+import 'src/matcher.dart';
 import 'src/tennis_match.dart';
 
-// Matchers
-class HasStatus<T extends TimeTracker> extends CustomMatcher {
-  HasStatus(TimeStatus matcher)
-    : super("TimeTracker with status:", "status", matcher);
-  @override
-  featureValueOf(actual) => (actual as T).status;
-}
+const ready = TimeStatus.ready;
+const started = TimeStatus.started;
+const resumed = TimeStatus.resumed;
+const paused = TimeStatus.paused;
+const ended = TimeStatus.ended;
 
-class HasDurationLargerZero<T extends TimeTracker> extends CustomMatcher {
-  HasDurationLargerZero() : super("TimeTracker with:", "duration", true);
-  @override
-  featureValueOf(actual) => (actual as T).duration > Duration.zero;
-}
-
-class HasPausesLargerZero<T extends TimeTracker> extends CustomMatcher {
-  HasPausesLargerZero() : super("TimeTracker with:", "duration", true);
-  @override
-  featureValueOf(actual) => (actual as T).durationOfPauses > Duration.zero;
-}
+/// Creates a [TennisMatch] with [status] and [timePoints].
+TennisMatch matchFactory({
+  required TimeStatus status,
+  required List<int> timePoints,
+}) => TennisMatch.fromJson({
+  'players': ['Ben', 'Dan'],
+  'status': status.toJson(),
+  'timePoints': timePoints,
+});
 
 void main() {
   group('Constructors:', () {
     test('default', () {
       final tennisMatch = TennisMatch(['Tim', 'Andy']);
-      expect(tennisMatch, HasStatus(TimeStatus.ready));
+      expect(tennisMatch, HasStatus(ready));
     });
   });
 
   group('Transitions:', () {
     test('ready -> started', () {
       final tennisMatch = TennisMatch(['Tim', 'Andy'])..start();
-      expect(tennisMatch, HasStatus(TimeStatus.started));
+      expect(tennisMatch, HasStatus(started));
       expect(tennisMatch.timePoints, hasLength(1));
     });
     test('started -> paused', () {
       final tennisMatch = TennisMatch(['Tim', 'Andy'])..start();
       tennisMatch.pause();
-      expect(tennisMatch, HasStatus(TimeStatus.paused));
+      expect(tennisMatch, HasStatus(paused));
       expect(tennisMatch.timePoints, hasLength(2));
     });
     test('started -> ended', () {
       final tennisMatch = TennisMatch(['Tim', 'Andy'])
         ..start()
         ..end();
-      expect(tennisMatch, HasStatus(TimeStatus.ended));
+      expect(tennisMatch, HasStatus(ended));
       expect(tennisMatch.timePoints, hasLength(2));
     });
     test('paused -> resumed', () {
@@ -57,7 +55,7 @@ void main() {
         ..start()
         ..pause()
         ..resume();
-      expect(tennisMatch, HasStatus(TimeStatus.resumed));
+      expect(tennisMatch, HasStatus(resumed));
       expect(tennisMatch.timePoints, hasLength(3));
     });
     test('paused -> ended', () {
@@ -66,14 +64,14 @@ void main() {
         ..pause()
         ..end();
       expect(tennisMatch.timePoints, hasLength(3));
-      expect(tennisMatch, HasStatus(TimeStatus.ended));
+      expect(tennisMatch, HasStatus(ended));
     });
     test('resumed -> paused', () {
       final tennisMatch = TennisMatch(['Tim', 'Andy'])
         ..start()
         ..pause()
         ..resume();
-      expect(tennisMatch, HasStatus(TimeStatus.resumed));
+      expect(tennisMatch, HasStatus(resumed));
       expect(tennisMatch.timePoints, hasLength(3));
     });
     test('resumed -> ended', () {
@@ -82,7 +80,7 @@ void main() {
         ..pause()
         ..resume()
         ..end();
-      expect(tennisMatch, HasStatus(TimeStatus.ended));
+      expect(tennisMatch, HasStatus(ended));
       expect(tennisMatch.timePoints, hasLength(4));
     });
   });
@@ -90,31 +88,31 @@ void main() {
   group('Void Transitions:', () {
     test('ready -> paused', () {
       final tennisMatch = TennisMatch(['Tim', 'Andy'])..pause();
-      expect(tennisMatch, HasStatus(TimeStatus.ready));
+      expect(tennisMatch, HasStatus(ready));
       expect(tennisMatch.timePoints, hasLength(0));
     });
     test('ready -> resumed', () {
       final tennisMatch = TennisMatch(['Tim', 'Andy'])..resume();
-      expect(tennisMatch, HasStatus(TimeStatus.ready));
+      expect(tennisMatch, HasStatus(ready));
       expect(tennisMatch.timePoints, hasLength(0));
     });
     test('ready -> ended', () {
       final tennisMatch = TennisMatch(['Tim', 'Andy'])..end();
-      expect(tennisMatch, HasStatus(TimeStatus.ready));
+      expect(tennisMatch, HasStatus(ready));
       expect(tennisMatch.timePoints, hasLength(0));
     });
     test('started -> resumed', () {
       final tennisMatch = TennisMatch(['Tim', 'Andy'])
         ..start()
         ..resume();
-      expect(tennisMatch, HasStatus(TimeStatus.started));
+      expect(tennisMatch, HasStatus(started));
       expect(tennisMatch.timePoints, hasLength(1));
     });
     test('started -> started', () {
       final tennisMatch = TennisMatch(['Tim', 'Andy'])
         ..start()
         ..start();
-      expect(tennisMatch, HasStatus(TimeStatus.started));
+      expect(tennisMatch, HasStatus(started));
       expect(tennisMatch.timePoints, hasLength(1));
     });
     test('paused -> started', () {
@@ -123,7 +121,7 @@ void main() {
         ..pause()
         ..start();
       expect(tennisMatch.timePoints, hasLength(2));
-      expect(tennisMatch, HasStatus(TimeStatus.paused));
+      expect(tennisMatch, HasStatus(paused));
     });
     test('paused -> paused', () {
       final tennisMatch = TennisMatch(['Tim', 'Andy'])
@@ -131,7 +129,7 @@ void main() {
         ..pause()
         ..pause();
       expect(tennisMatch.timePoints, hasLength(2));
-      expect(tennisMatch, HasStatus(TimeStatus.paused));
+      expect(tennisMatch, HasStatus(paused));
     });
     test('resumed -> started', () {
       final tennisMatch = TennisMatch(['Tim', 'Andy'])
@@ -139,7 +137,7 @@ void main() {
         ..pause()
         ..resume()
         ..start();
-      expect(tennisMatch, HasStatus(TimeStatus.resumed));
+      expect(tennisMatch, HasStatus(resumed));
       expect(tennisMatch.timePoints, hasLength(3));
     });
     test('resumed -> resumed', () {
@@ -148,7 +146,7 @@ void main() {
         ..pause()
         ..resume()
         ..resume();
-      expect(tennisMatch, HasStatus(TimeStatus.resumed));
+      expect(tennisMatch, HasStatus(resumed));
       expect(tennisMatch.timePoints, hasLength(3));
     });
     test('ended -> started', () {
@@ -156,7 +154,7 @@ void main() {
         ..start()
         ..end()
         ..start();
-      expect(tennisMatch, HasStatus(TimeStatus.ended));
+      expect(tennisMatch, HasStatus(ended));
       expect(tennisMatch.timePoints, hasLength(2));
     });
     test('ended -> paused', () {
@@ -164,7 +162,7 @@ void main() {
         ..start()
         ..end()
         ..pause();
-      expect(tennisMatch, HasStatus(TimeStatus.ended));
+      expect(tennisMatch, HasStatus(ended));
       expect(tennisMatch.timePoints, hasLength(2));
     });
     test('ended -> resumed', () {
@@ -172,7 +170,7 @@ void main() {
         ..start()
         ..end()
         ..resume();
-      expect(tennisMatch, HasStatus(TimeStatus.ended));
+      expect(tennisMatch, HasStatus(ended));
       expect(tennisMatch.timePoints, hasLength(2));
     });
     test('ended -> ended', () {
@@ -180,7 +178,7 @@ void main() {
         ..start()
         ..end()
         ..end();
-      expect(tennisMatch, HasStatus(TimeStatus.ended));
+      expect(tennisMatch, HasStatus(ended));
       expect(tennisMatch.timePoints, hasLength(2));
     });
   });
@@ -225,12 +223,12 @@ void main() {
   group('Duration:', () {
     test('ready', () {
       final tennisMatch = TennisMatch(['Tim', 'Andy']);
-      expect(tennisMatch.duration, Duration.zero);
+      expect(tennisMatch, HasDuration(equals(Duration.zero)));
       expect(tennisMatch.durationOfPauses, Duration.zero);
     });
     test('started', () {
       final tennisMatch = TennisMatch(['Tim', 'Andy'])..start();
-      expect(tennisMatch, HasDurationLargerZero());
+      expect(tennisMatch, HasDuration(greaterThan(Duration.zero)));
       expect(tennisMatch.durationOfPauses, Duration.zero);
     });
 
@@ -238,8 +236,8 @@ void main() {
       final tennisMatch = TennisMatch(['Tim', 'Andy'])
         ..start()
         ..pause();
-      expect(tennisMatch, HasDurationLargerZero());
-      expect(tennisMatch, HasPausesLargerZero());
+      expect(tennisMatch, HasDuration(greaterThan(Duration.zero)));
+      expect(tennisMatch, HasPauseDuration(equals(Duration.zero)));
     });
     test('end', () {
       final tennisMatch = TennisMatch(['Tim', 'Andy'])
@@ -247,12 +245,47 @@ void main() {
         ..pause()
         ..resume()
         ..end();
-      expect(tennisMatch, HasDurationLargerZero());
-      expect(tennisMatch, HasPausesLargerZero());
+      expect(tennisMatch, HasDuration(greaterThan(Duration.zero)));
+      expect(tennisMatch, HasPauseDuration(greaterThan(Duration.zero)));
       final totalTime = tennisMatch.endTime!.difference(tennisMatch.startTime!);
       expect(totalTime, tennisMatch.duration + tennisMatch.durationOfPauses);
     });
   });
+
+  group('Duration in us:', () {
+    test('ready', () {
+      final tennisMatch = matchFactory(status: ready, timePoints: []);
+      expect(tennisMatch.durationAsMicroseconds, 0);
+      expect(tennisMatch.pauses, <int>[]);
+    });
+    test('started', () {
+      final tennisMatch = matchFactory(status: started, timePoints: [0]);
+      expect(tennisMatch.pauses, <int>[]);
+    });
+
+    test('paused', () {
+      final tennisMatch = matchFactory(status: paused, timePoints: [0, 1000]);
+      expect(tennisMatch.durationAsMicroseconds, 1000);
+      expect(tennisMatch.pauses, <int>[]);
+    });
+    test('resumed', () {
+      final tennisMatch = matchFactory(
+        status: ended,
+        timePoints: List.generate(11, (i) => i * 1000),
+      );
+      expect(tennisMatch.durationAsMicroseconds, 5000);
+      expect(tennisMatch.pauses, [for (var i = 0; i < 5; i++) 1000]);
+    });
+    test('end', () {
+      final tennisMatch = matchFactory(
+        status: ended,
+        timePoints: [0, 1000, 2000, 3000],
+      );
+      expect(tennisMatch.durationAsMicroseconds, 2000);
+      expect(tennisMatch.pauses, [1000]);
+    });
+  });
+
   group('Serialize:', () {
     test('json', () {
       final tennisMatch = TennisMatch(['Tim', 'Andy'])
@@ -292,6 +325,69 @@ void main() {
 
       expect(json, jsonDecoded);
       expect(tennisMatch, TennisMatch.fromJson(jsonDecoded));
+    });
+  });
+  group('Json Validation Error:', () {
+    test('failed init in state ready', () {
+      expect(
+        () => matchFactory(status: ready, timePoints: [0, 1000, 2000, 3000]),
+        throwsA(
+          isA<ErrorOf<TimeTracker>>().having(
+            (e) => e.message,
+            'message',
+            'Invalid time line detected',
+          ),
+        ),
+      );
+
+    });
+    test('failed init in state started', () {
+      expect(
+        () => matchFactory(status: started, timePoints: [0, 1000,]),
+        throwsA(
+          isA<ErrorOf<TimeTracker>>().having(
+            (e) => e.message,
+            'message',
+            'Invalid time line detected',
+          ),
+        ),
+      );
+    });
+    test('failed init in state paused', () {
+      expect(
+        () => matchFactory(status: paused, timePoints: [0, 1000, 2000]),
+        throwsA(
+          isA<ErrorOf<TimeTracker>>().having(
+            (e) => e.message,
+            'message',
+            'Invalid time line detected',
+          ),
+        ),
+      );
+    });
+    test('failed init in state resumed', () {
+      expect(
+        () => matchFactory(status: resumed, timePoints: [0, 1000]),
+        throwsA(
+          isA<ErrorOf<TimeTracker>>().having(
+            (e) => e.message,
+            'message',
+            'Invalid time line detected',
+          ),
+        ),
+      );
+    });
+    test('failed init in state ended', () {
+      expect(
+        () => matchFactory(status: ended, timePoints: [0]),
+        throwsA(
+          isA<ErrorOf<TimeTracker>>().having(
+            (e) => e.message,
+            'message',
+            'Invalid time line detected',
+          ),
+        ),
+      );
     });
   });
 }
