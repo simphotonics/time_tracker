@@ -23,22 +23,17 @@ defined by the mixin [`TimeTracker`][TimeTracker].
 To use this library include [`time_tracker`][time_tracker]
 as a dependency in your pubspec.yaml file.
 
-<!-- Status changing methods are printed with green font. Calling a status changing
-method where there is no transition defined has no effect.
-For example: calling the method `end()` when the object has status
-`TimeStatus.ready` has no effect. -->
-
 In addition to methods for recording time points,
 the mixin [`TimeTracker`][TimeTracker] provides helper methods
 for json-serialization. It is recommended that classes *with*
-[`TimeTracker`][TimeTracker] override
-the equality operator such that a deserialized object will compare equal
+[`TimeTracker`][TimeTracker] override the getter `hashCode`
+and the equality operator
+such that a deserialized object will compare equal
 to the original object.
 
-The example below shows how to construct an object of type `TennisMatch` *with*
-the mixin `TimeTracker`. The object records its own time
-points. Note: The getter `hashCode` and the equality operator are overriden
-so that decoded objects are equal when compared with the original object.
+The example below shows how to create the class `TennisMatch` *with*
+the mixin `TimeTracker`.
+
 
 ```Dart
 import 'package:exception_templates/exception_templates.dart';
