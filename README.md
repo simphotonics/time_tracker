@@ -138,8 +138,6 @@ void main() async {
 
 ```Console
 $ dart example/bin/time_tracker_example.dart
-
-$ dart example/bin/time_tracker_example.dart
 ----- Create an object of type TennisMatch -----
 TennisMatch: players: [Tim, Andy] | status: ready | duration: 0:00:00.000000
 
