@@ -92,33 +92,41 @@ start, pause, resume, and end the match. It also shows how to serialize and
 deserialize the object using ['dart:convert'][dart:convert].
 
 ```Dart
+import 'dart:convert';
+import '../../test/src/tennis_match.dart';
+
 void main() async {
-  /// Create object (start time is recorded)
-  final match = TennisMatch(['Tim', 'Andy']);
   print('----- Create an object of type TennisMatch -----');
+  final match = TennisMatch(['Tim', 'Andy']);
   print(match);
   match.start();
 
-  print('Status: ${match.status.name} at: ${match.startTime}');
-  await Future.delayed(const Duration(milliseconds: 3), () {
+  print('\nStatus: ${match.status.name} at: ${match.startTime}');
+
+  await Future.delayed(const Duration(seconds: 3), () {
     // Pause object
     match.pause();
-    print('Status: ${match.status.name} at: ${match.lastTimePoint}');
+    print('Status: ${match.status.name}  at: ${match.lastTimePoint}');
   });
 
-  await Future.delayed(const Duration(milliseconds: 1), () {
+  await Future.delayed(const Duration(seconds: 1), () {
     // Resume object
     match.resume();
     print('Status: ${match.status.name} at: ${match.lastTimePoint}');
   });
 
-  await Future.delayed(const Duration(milliseconds: 2), () {
+  await Future.delayed(const Duration(seconds: 2), () {
     // Mark object as ended.
     match.end();
-    print('Status: ${match.status.name} at: ${match.lastTimePoint}');
+    print('Status: ${match.status.name}   at: ${match.lastTimePoint}');
   });
 
   print('');
+  print('---------- Getters -------------------');
+  print('match.durationAsMicroseconds: ${match.durationAsMicroseconds}\n');
+  print('match.durationOfPauses: ${match.durationOfPauses}\n');
+  print('match.pauses: ${match.pauses} in us\n');
+
   print('---------- Json Encoding -------------');
   final jsonString = jsonEncode(match);
   print('Serialized object:');
@@ -141,17 +149,24 @@ $ dart example/bin/time_tracker_example.dart
 ----- Create an object of type TennisMatch -----
 TennisMatch: players: [Tim, Andy] | status: ready | duration: 0:00:00.000000
 
-Status: started at: 2025-10-09 23:53:16.841832
-Status: paused at: 2025-10-09 23:53:19.854479
-Status: resumed at: 2025-10-09 23:53:20.858332
-Status: ended at: 2025-10-09 23:53:22.859459
+Status: started at: 2025-10-10 18:17:51.189452
+Status: paused  at: 2025-10-10 18:17:54.201310
+Status: resumed at: 2025-10-10 18:17:55.212405
+Status: ended   at: 2025-10-10 18:17:57.214796
+
+---------- Getters -------------------
+match.durationAsMicroseconds: 5014249
+
+match.durationOfPauses: 0:00:01.011095
+
+match.pauses: [1011095] in us
 
 ---------- Json Encoding -------------
 Serialized object:
-{"status":{"timeStatus":"ended"},"timePoints":[1760050396841832,1760050399854479,1760050400858332,1760050402859459],"players":["Tim","Andy"]}
+{"status":{"timeStatus":"ended"},"timePoints":[1760116671189452,1760116674201310,1760116675212405,1760116677214796],"players":["Tim","Andy"]}
 
 Deserialized object:
-TennisMatch: players: [Tim, Andy] | status: ended | duration: 0:00:05.013774
+TennisMatch: players: [Tim, Andy] | status: ended | duration: 0:00:05.014249
 
 match == decodedMatch: true
 ```

@@ -2,7 +2,6 @@ import 'dart:convert';
 import '../../test/src/tennis_match.dart';
 
 void main() async {
-  /// Create object (start time is recorded)
   print('----- Create an object of type TennisMatch -----');
   final match = TennisMatch(['Tim', 'Andy']);
   print(match);
@@ -13,7 +12,7 @@ void main() async {
   await Future.delayed(const Duration(seconds: 3), () {
     // Pause object
     match.pause();
-    print('Status: ${match.status.name} at: ${match.lastTimePoint}');
+    print('Status: ${match.status.name}  at: ${match.lastTimePoint}');
   });
 
   await Future.delayed(const Duration(seconds: 1), () {
@@ -25,10 +24,15 @@ void main() async {
   await Future.delayed(const Duration(seconds: 2), () {
     // Mark object as ended.
     match.end();
-    print('Status: ${match.status.name} at: ${match.lastTimePoint}');
+    print('Status: ${match.status.name}   at: ${match.lastTimePoint}');
   });
 
   print('');
+  print('---------- Getters -------------------');
+  print('match.durationAsMicroseconds: ${match.durationAsMicroseconds}\n');
+  print('match.durationOfPauses: ${match.durationOfPauses}\n');
+  print('match.pauses: ${match.pauses} in us\n');
+
   print('---------- Json Encoding -------------');
   final jsonString = jsonEncode(match);
   print('Serialized object:');
