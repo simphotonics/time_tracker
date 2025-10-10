@@ -6,21 +6,27 @@
 
 A commonly required task consists in recording the time a process *starts*, is *paused/resumed*,
 and the time it
-is *completed*. An object of type [`TimeTracker`][TimeTracker] is designed to perform this job.
-It is similar to a [`StopWatch`][StopWatch],
+is *completed*. The mixin [`TimeTracker`][TimeTracker] is designed
+to perform this job. Its methods provide similar functionality to
+a [`StopWatch`][StopWatch],
 however instead of elapsed ticks it records a [`DateTime`][DateTime] point
 whenever its status changes.
 
-The image below shows the available states (blue font) defined by
-the enum [`TimeStatus`][TimeStatus] and available transitions (orange arrows)
-defined by the class [`TimeTracker`][TimeTracker].
+The image below shows the available states (grey font) defined by
+the enum [`TimeStatus`][TimeStatus] and available transitions (green arrows)
+defined by the mixin [`TimeTracker`][TimeTracker].
 
 ![TimeStatus](https://github.com/simphotonics/time_tracker/raw/main/images/time_status.svg?sanitize=true)
 
-Status changing methods are printed with green font. Calling a status changing
+## Usage
+
+To use this library include [`time_tracker`][time_tracker]
+as a dependency in your pubspec.yaml file.
+
+<!-- Status changing methods are printed with green font. Calling a status changing
 method where there is no transition defined has no effect.
 For example: calling the method `end()` when the object has status
-`TimeStatus.ready` has no effect.
+`TimeStatus.ready` has no effect. -->
 
 In addition to methods for recording time points,
 the mixin [`TimeTracker`][TimeTracker] provides helper methods
@@ -28,11 +34,6 @@ for json-serialization. It is recommended that classes *with*
 [`TimeTracker`][TimeTracker] override
 the equality operator such that a deserialized object will compare equal
 to the original object.
-
-## Usage
-
-To use this library include [`time_tracker`][time_tracker]
-as a dependency in your pubspec.yaml file.
 
 The example below shows how to construct an object of type `TennisMatch` *with*
 the mixin `TimeTracker`. The object records its own time
