@@ -1,3 +1,7 @@
+## 1.2.0
+- Required Dart SDK ^3.13.0.
+- Updated dependencies
+
 ## 1.1.2
 - Added custom matchers.
 - Added the mixin getters:
@@ -6,7 +10,7 @@
    * `durationOfPausesAsMicroseconds`,
    * `durationOfPauses`.
 - Added validation to ensure time line provided by a json map is compatible
-  with the provided time state. 
+  with the provided time state.
 
 ## 1.1.1
 - Updated dependencies.
