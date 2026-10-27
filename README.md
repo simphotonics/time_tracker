@@ -89,7 +89,7 @@ class TennisMatch with TimeTracker {
 
 The program below demonstrates how to use an object of type `TennisMatch` to
 start, pause, resume, and end the match. It also shows how to serialize and
-deserialize the object using ['dart:convert`][dart:convert].
+deserialize the object using [`dart:convert`][dart:convert].
 
 ```Dart
 import 'dart:convert';
