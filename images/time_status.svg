@@ -1,27 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg width="210mm" height="78mm" version="1.1" viewBox="0 0 210 78" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="180mm" height="78mm" version="1.1" viewBox="0 0 180 78" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
  <defs>
-  <marker id="marker25775" overflow="visible" markerHeight="7" markerWidth="4.2071066" orient="auto-start-reverse" preserveAspectRatio="xMidYMid" viewBox="0 0 4.2071068 7">
+  <marker id="marker22367-2" overflow="visible" markerHeight="6.9999995" markerWidth="4.2071066" orient="auto-start-reverse" preserveAspectRatio="xMidYMid" viewBox="0 0 4.2071068 7">
    <path transform="rotate(180 .125 0)" d="m3-3-3 3 3 3" fill="none" stroke="context-stroke" stroke-linecap="round"/>
   </marker>
-  <marker id="marker22367" overflow="visible" markerHeight="6.9999995" markerWidth="4.2071066" orient="auto-start-reverse" preserveAspectRatio="xMidYMid" viewBox="0 0 4.2071068 7">
+  <marker id="marker21897-1" overflow="visible" markerHeight="6.9999995" markerWidth="4.2071066" orient="auto-start-reverse" preserveAspectRatio="xMidYMid" viewBox="0 0 4.2071068 7">
    <path transform="rotate(180 .125 0)" d="m3-3-3 3 3 3" fill="none" stroke="context-stroke" stroke-linecap="round"/>
-  </marker>
-  <marker id="marker21897" overflow="visible" markerHeight="7" markerWidth="4.2071066" orient="auto-start-reverse" preserveAspectRatio="xMidYMid" viewBox="0 0 4.2071068 7">
-   <path transform="rotate(180 .125 0)" d="m3-3-3 3 3 3" fill="none" stroke="context-stroke" stroke-linecap="round"/>
-  </marker>
-  <marker id="Arrow3" overflow="visible" markerHeight="7" markerWidth="4.2071066" orient="auto-start-reverse" preserveAspectRatio="xMidYMid" viewBox="0 0 4.2071068 7">
-   <path transform="rotate(180 .125 0)" d="m3-3-3 3 3 3" fill="none" stroke="context-stroke" stroke-linecap="round"/>
-  </marker>
-  <marker id="marker21013" overflow="visible" markerHeight="6.7071066" markerWidth="4.0606604" orient="auto-start-reverse" preserveAspectRatio="xMidYMid" viewBox="0 0 4.0606602 6.7071068">
-   <path transform="rotate(180 .125 0)" d="m3-3-3 3 3 3" fill="none" stroke="context-stroke"/>
-  </marker>
-  <marker id="marker20597" overflow="visible" markerHeight="6.7071066" markerWidth="4.0606604" orient="auto-start-reverse" preserveAspectRatio="xMidYMid" viewBox="0 0 4.0606602 6.7071068">
-   <path transform="rotate(180 .125 0)" d="m3-3-3 3 3 3" fill="none" stroke="context-stroke"/>
-  </marker>
-  <marker id="Arrow1" overflow="visible" markerHeight="6.7071066" markerWidth="4.0606604" orient="auto-start-reverse" preserveAspectRatio="xMidYMid" viewBox="0 0 4.0606602 6.7071068">
-   <path transform="rotate(180 .125 0)" d="m3-3-3 3 3 3" fill="none" stroke="context-stroke"/>
   </marker>
  </defs>
  <metadata>
@@ -32,55 +17,39 @@
    </cc:Work>
   </rdf:RDF>
  </metadata>
- <g transform="translate(-26.245 -156.41)">
-  <g fill="#000000" font-family="'DejaVu Sans'" font-weight="bold" word-spacing="0px">
-   <g font-size="3.8806px" letter-spacing="-5.2917px">
-    <text x="52.150867" y="265.62097" writing-mode="tb-rl" style="line-height:1.25" xml:space="preserve"/>
-    <text x="56.435726" y="267.24628" style="line-height:1.25" xml:space="preserve"/>
-    <text x="68.551537" y="265.52249" style="line-height:1.25" xml:space="preserve"/>
-   </g>
-   <flowRoot transform="matrix(.26458 0 0 .26458 26.245 211.85)" font-size="14.667px" letter-spacing="-20px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="88.42" y="200.08" width="63.104" height="31.831"/></flowRegion><flowPara/></flowRoot>
-   <flowRoot transform="matrix(.26458 0 0 .26458 26.245 211.85)" font-size="14.667px" letter-spacing="-20px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="76.878" y="197.66" width="56.03" height="30.342"/></flowRegion><flowPara/></flowRoot>
-   <text x="69.782814" y="268.72382" font-size="3.8806px" letter-spacing="-5.2917px" style="line-height:1.25" xml:space="preserve"/>
-   <g font-size="14.667px">
-    <flowRoot transform="matrix(.26458 0 0 .26458 26.245 211.85)" direction="rtl" letter-spacing="100px" style="line-height:1.25" xml:space="preserve"><flowRegion letter-spacing="100px"><rect x="148.92" y="188.17" width="234.54" height="42.255"/></flowRegion><flowPara/></flowRoot>
-    <flowRoot direction="rtl" letter-spacing="0px" style="line-height:1.25" xml:space="preserve"><flowRegion><rect x="149.66" y="-572.6" width="130.3" height="31.645"/></flowRegion><flowPara/></flowRoot>
-    <text id="text777" x="146.23749" y="142.13103" fill="#000000" font-family="sans-serif" font-size="9.8778px" font-weight="bold" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="146.23749" y="142.13103" font-family="sans-serif" font-size="9.8778px" font-weight="bold" stroke-width=".26458"/></text>
-   </g>
-  </g>
-  <use transform="translate(-.71638 -17.331)" xlink:href="#text777"/>
-  <g>
-   <text x="107.1955" y="163.49765" fill="#000000" font-family="sans-serif" font-size="14.111px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="107.1955" y="163.49765" stroke-width=".26458"/></text>
-   <path d="m143.43 173.25-44.247 2e-3" fill="#009e4d" marker-start="url(#marker22367)" stroke="#009e4d" stroke-linejoin="round" stroke-width=".8"/>
-   <text transform="scale(1.0011 .99892)" x="63.023216" y="175.05075" fill="#888888" font-family="sans-serif" font-size="7.8625px" font-weight="bold" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="63.023216" y="175.05075" fill="#888888" font-family="sans-serif" font-size="7.8625px" font-weight="bold" stroke-width=".26458">READY</tspan></text>
-  </g>
-  <rect x="60.283" y="166.81" width="31.84" height="10.323" rx="5.4021" ry="7.7825" fill="none" stroke="#888" stroke-width=".95698"/>
-  <text transform="scale(1.0011 .99892)" x="161.97449" y="194.57716" fill="#888888" font-family="sans-serif" font-size="8.0425px" font-weight="bold" letter-spacing="0px" stroke-width=".27064" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="161.97449" y="194.57716" fill="#888888" font-family="sans-serif" font-size="8.0425px" font-weight="bold" stroke-width=".27064">RESUMED</tspan></text>
-  <rect x="158.96" y="186.12" width="45.359" height="10.294" rx="5.8535" ry="7.76" fill="none" stroke="#888" stroke-width=".95911"/>
-  <text transform="scale(1.0011 .99892)" x="54.01284" y="201.19136" fill="#888888" font-family="sans-serif" font-size="7.8625px" font-weight="bold" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="54.01284" y="201.19136" fill="#888888" font-family="sans-serif" font-size="7.8625px" font-weight="bold" stroke-width=".26458">PAUSED</tspan></text>
-  <rect x="51.302" y="192.93" width="36.56" height="10.464" rx="4.8523" ry="7.8884" fill="none" stroke="#888" stroke-width=".95991"/>
-  <text transform="scale(1.0011 .99892)" x="106.95249" y="221.92517" fill="#888888" font-family="sans-serif" font-size="7.8625px" font-weight="bold" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="106.95249" y="221.92517" fill="#888888" font-family="sans-serif" font-size="7.8625px" font-weight="bold" stroke-width=".26458">ENDED</tspan></text>
-  <rect x="103.94" y="213.64" width="33.805" height="10.53" rx="5.5737" ry="7.9382" fill="none" stroke="#888" stroke-width=".97146"/>
-  <text transform="scale(1.0011 .99892)" x="152.21469" y="175.04691" fill="#888888" font-family="sans-serif" font-size="7.8625px" font-weight="bold" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="152.21469" y="175.04691" fill="#888888" font-family="sans-serif" font-size="7.8625px" font-weight="bold" stroke-width=".26458">STARTED</tspan></text>
-  <g fill="none">
-   <rect x="150.17" y="166.8" width="39.396" height="10.208" rx="5.0992" ry="7.6953" stroke="#888" stroke-width=".94609"/>
-   <g stroke="#009e4d" stroke-linejoin="round" stroke-width=".8">
-    <path id="path7379" d="m89.644 190.06 58.647-12.722" fill="none" marker-start="url(#marker21897)" stroke="#009e4d" stroke-linejoin="round" stroke-width=".8"/>
-    <path d="m155.09 192.14c-19.795 1.851-40.107 2.7335-60.367 4.3947" marker-start="url(#Arrow3)"/>
-    <path id="path7385" d="m144.19 214.66 27.193-14.288" fill="none" marker-start="url(#marker20597)" stroke="#009e4d" stroke-linejoin="round" stroke-width=".79999"/>
-    <path id="path7387" d="m74.567 210.07 25.027 8.2495" fill="none" marker-end="url(#marker25775)" stroke="#009e4d" stroke-linejoin="round" stroke-width=".8"/>
-    <path d="m144.25 218.99c36.522-0.0191 95.15-17.032 51.519-44.769" marker-start="url(#Arrow1)"/>
-   </g>
-  </g>
-  <g fill="#009e4d" font-family="sans-serif" font-size="6.7392px" font-style="italic" font-weight="bold" letter-spacing="0px" stroke-width=".26458" word-spacing="0px">
-   <text transform="scale(1.0011 .99892)" x="111.01506" y="171.52698" style="line-height:1.25" xml:space="preserve"><tspan x="111.01506" y="171.52698" fill="#009e4d" font-family="sans-serif" font-size="6.7392px" font-style="italic" font-weight="bold" stroke-width=".26458">start</tspan></text>
-   <text transform="translate(7.1467 -5.8858)" style="line-height:1.25" xml:space="preserve"><textPath fill="#009e4d" stroke-width=".26458" xlink:href="#path7385"><tspan fill="#009e4d" font-family="sans-serif" font-size="6.7392px" font-style="italic" font-weight="bold" stroke-width=".26458">end</tspan></textPath></text>
-   <text transform="matrix(.99893 -.065481 .065623 .99677 0 0)" x="96.425369" y="200.94476" style="line-height:1.25" xml:space="preserve"><tspan x="96.425369" y="200.94476" fill="#009e4d" font-family="sans-serif" font-size="6.7392px" font-style="italic" font-weight="bold" stroke-width=".26458">resume</tspan></text>
-   <text transform="translate(20.176 -6.6514)" style="line-height:1.25" xml:space="preserve"><textPath fill="#009e4d" stroke-width=".26458" xlink:href="#path7379"><tspan fill="#009e4d" font-family="sans-serif" font-size="6.7392px" font-style="italic" font-weight="bold" stroke-width=".26458">pause</tspan></textPath></text>
-   <text transform="translate(7.4613 .86193)" style="line-height:1.25" xml:space="preserve"><textPath fill="#009e4d" stroke-width=".26458" xlink:href="#path7387"><tspan fill="#009e4d" font-family="sans-serif" font-size="6.7392px" font-style="italic" font-weight="bold" stroke-width=".26458">end</tspan></textPath></text>
-  </g>
-  <path d="m93.885 201.36c16.045 9.1051 45.215 8.8892 65.032-5.6001" fill="none" marker-start="url(#marker21013)" stroke="#009e4d" stroke-linejoin="round" stroke-width=".8"/>
-  <text transform="matrix(.98353 .18035 -.18113 .98353 79.818 -25.674)" fill="#009e4d" font-family="sans-serif" font-size="6.7392px" font-style="italic" font-weight="bold" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><textPath fill="#009e4d" stroke-width=".26458" xlink:href="#path7385"><tspan fill="#009e4d" font-family="sans-serif" font-size="6.7392px" font-style="italic" font-weight="bold" stroke-width=".26458">end</tspan></textPath></text>
-  <text transform="scale(1.0011 .99892)" x="112.46301" y="205.23109" fill="#009e4d" font-family="sans-serif" font-size="6.7392px" font-style="italic" font-weight="bold" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="112.46301" y="205.23109" fill="#009e4d" font-family="sans-serif" font-size="6.7392px" font-style="italic" font-weight="bold" stroke-width=".26458">pause</tspan></text>
+ <g transform="translate(7.4083 -.28315)">
+  <text transform="scale(1.0011 .99891)" x="19.749527" y="20.155638" fill="#888888" font-family="sans-serif" font-size="7.8626px" font-weight="bold" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="19.749527" y="20.155638" fill="#888888" font-family="sans-serif" font-size="7.8626px" font-weight="bold" stroke-width=".26458">READY</tspan></text>
+  <rect x="16.962" y="12.082" width="31.84" height="10.323" rx="5.4021" ry="7.7825" fill="none" stroke="#888" stroke-width=".95698"/>
  </g>
+ <text transform="scale(1.0011 .99891)" x="119.10027" y="19.9359" fill="#888888" font-family="sans-serif" font-size="7.8626px" font-weight="bold" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="119.10027" y="19.9359" fill="#888888" font-family="sans-serif" font-size="7.8626px" font-weight="bold" stroke-width=".26458">STARTED</tspan></text>
+ <rect x="116.49" y="11.856" width="39.396" height="10.208" rx="5.0992" ry="7.6953" fill="none" stroke="#888" stroke-width=".94609"/>
+ <g transform="translate(-1.0583 .97056)">
+  <text transform="scale(1.0011 .99891)" x="117.66003" y="42.273548" fill="#888888" font-family="sans-serif" font-size="8.0426px" font-weight="bold" letter-spacing="0px" stroke-width=".27064" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="117.66003" y="42.273548" fill="#888888" font-family="sans-serif" font-size="8.0426px" font-weight="bold" stroke-width=".27064">RESUMED</tspan></text>
+  <rect x="114.6" y="33.98" width="45.359" height="10.294" rx="5.8535" ry="7.76" fill="none" stroke="#888" stroke-width=".95911"/>
+ </g>
+ <text transform="scale(1.0011 .99891)" x="49.059719" y="71.040703" fill="#888888" font-family="sans-serif" font-size="7.8626px" font-weight="bold" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="49.059719" y="71.040703" fill="#888888" font-family="sans-serif" font-size="7.8626px" font-weight="bold" stroke-width=".26458">ENDED</tspan></text>
+ <rect x="45.454" y="62.918" width="33.805" height="10.53" rx="5.5737" ry="7.9382" fill="none" stroke="#888" stroke-width=".97146"/>
+ <text transform="scale(1.0011 .99891)" x="21.686878" y="43.071476" fill="#888888" font-family="sans-serif" font-size="7.8626px" font-weight="bold" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="21.686878" y="43.071476" fill="#888888" font-family="sans-serif" font-size="7.8626px" font-weight="bold" stroke-width=".26458">PAUSED</tspan></text>
+ <rect x="18.826" y="34.866" width="36.56" height="10.464" rx="4.8523" ry="7.8884" fill="none" stroke="#888" stroke-width=".95991"/>
+ <path d="m110.51 16.889-48.083 2e-3" fill="#009e4d" marker-start="url(#marker22367-2)" stroke="#009e4d" stroke-linejoin="round" stroke-width=".8"/>
+ <text transform="scale(1.0011 .99891)" x="74.333267" y="16.14533" fill="#009e4d" font-family="sans-serif" font-size="6.7393px" font-style="italic" font-weight="bold" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="74.333267" y="16.14533" fill="#009e4d" font-family="sans-serif" font-size="6.7393px" font-style="italic" font-weight="bold" stroke-width=".26458">start</tspan></text>
+ <g stroke-linejoin="round">
+  <path d="m62.704 34.258 47.868-12.848" fill="none" marker-start="url(#marker21897-1)" stroke="#9e00b3" stroke-width=".72631"/>
+  <g stroke-width=".8">
+   <path d="m110.03 37.481-47.614 2e-3" fill="#008080" marker-start="url(#marker22367-2)" stroke="#008080"/>
+   <path d="m83.845 61.212 51.505-13.587" fill="none" marker-start="url(#marker21897-1)" stroke="#ff2a2a"/>
+   <path d="m84.46 67.636 82.019-0.52944" fill="none" fill-opacity="0" marker-start="url(#marker21897-1)" stroke="#ff2a2a"/>
+  </g>
+  <path d="m60.197 59.876-18.541-11.615" fill="#f00" marker-start="url(#marker21897-1)" stroke="#f00" stroke-width=".8"/>
+ </g>
+ <path d="m166.12 67.483c-0.4043-50.638-0.4043-50.638-0.4043-50.638l-7.1921-0.05627" fill="none" stroke="#ff2a2a" stroke-width="1.008"/>
+ <g font-family="sans-serif" font-size="6.7393px" font-style="italic" font-weight="bold" letter-spacing="0px" stroke-width=".26458" word-spacing="0px">
+  <text transform="scale(1.0011 .99891)" x="124.83399" y="66.587959" fill="#ff2a2a" style="line-height:1.25" xml:space="preserve"><tspan x="124.83399" y="66.587959" fill="#ff2a2a" font-family="sans-serif" font-size="6.7393px" font-style="italic" font-weight="bold" stroke-width=".26458">end</tspan></text>
+  <text transform="matrix(.97008 -.24724 .24671 .96797 0 0)" x="67.719765" y="47.529411" fill="#9e00b3" style="line-height:1.25" xml:space="preserve"><tspan x="67.719765" y="47.529411" fill="#9e00b3" font-family="sans-serif" font-size="6.7393px" font-style="italic" font-weight="bold" stroke-width=".26458">pause</tspan></text>
+  <text transform="scale(1.0011 .99891)" x="76.820099" y="36.127403" fill="#008080" style="line-height:1.25" xml:space="preserve"><tspan x="76.820099" y="36.127403" fill="#008080" font-family="sans-serif" font-size="6.7393px" font-style="italic" font-weight="bold" stroke-width=".26458">resume</tspan></text>
+  <text transform="matrix(.97505 -.22686 .22636 .97292 0 0)" x="85.079895" y="76.869789" fill="#ff2a2a" style="line-height:1.25" xml:space="preserve"><tspan x="85.079895" y="76.869789" fill="#ff2a2a" font-family="sans-serif" font-size="6.7393px" font-style="italic" font-weight="bold" stroke-width=".26458">end</tspan></text>
+  <text transform="matrix(.82484 .56729 -.56606 .82304 0 0)" x="67.182571" y="14.782942" fill="#ff2a2a" style="line-height:1.25" xml:space="preserve"><tspan x="67.182571" y="14.782942" fill="#ff2a2a" font-family="sans-serif" font-size="6.7393px" font-style="italic" font-weight="bold" stroke-width=".26458">end</tspan></text>
+ </g>
+ <path d="m62.13 44.103 47.431 2e-3" fill="none" marker-start="url(#marker22367-2)" stroke="#9e00b3" stroke-linejoin="round" stroke-width=".8"/>
+ <text transform="scale(1.0011 .99891)" x="76.397934" y="43.115768" fill="#9e00b3" font-family="sans-serif" font-size="6.7393px" font-style="italic" font-weight="bold" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="76.397934" y="43.115768" fill="#9e00b3" font-family="sans-serif" font-size="6.7393px" font-style="italic" font-weight="bold" stroke-width=".26458">pause</tspan></text>
 </svg>
