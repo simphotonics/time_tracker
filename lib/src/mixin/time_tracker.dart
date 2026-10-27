@@ -6,21 +6,23 @@ import '../extension/equal.dart';
 import '../enum/time_status.dart';
 import '../interface/time_control.dart';
 
-/// A mixin providing methods to records time-status changes.
-/// * The object can be started, paused, resumed, and ended.
-/// * To retrieve the current state use the getter `status`.
-/// * To retrieve the recorded time points use the getter `dateTimePoints`.
-/// * To retrieve the recorded time points as microseconds since epoch use
-///   the getter `timePoints`.
+/// A mixin providing methods for recording time-status changes.
+///
 ///   Note: Every time the objects status changes a new time point is
 ///   added.
+///
+/// * The object can be started, paused, resumed, and ended.
+/// * To retrieve the current state use the getter [status].
+/// * To retrieve the recorded time points use the getter [dateTimePoints].
+/// * To retrieve the recorded time points as microseconds since epoch use
+///   the getter [timePoints].
 mixin TimeTracker implements Serializable, TimeControl {
   TimeStatus _status = TimeStatus.ready;
   final _timePoints = <int>[];
 
   /// Reads a json map and initializes the
   /// tracker status and time points.
-  /// * If the status provided is [Timestatus.ready]
+  /// * If the status provided is [TimeStatus.ready]
   /// any time points will be ignored to maintain consistency.
   /// * If validation fails and [readyOnValidationError] is `true`,
   /// the tracker will be initialized with a status of
@@ -114,10 +116,9 @@ mixin TimeTracker implements Serializable, TimeControl {
 
   /// Sets the time status of the object to [TimeStatus.ended].
   /// Adds a time point marking the completion time.
-  /// ---
   ///
   /// Note: If the object has status [TimeStatus.ready] or
-  /// status [TimeStatus.ended] the above actions are skipped!
+  /// [TimeStatus.ended] the above actions are skipped!
   @override
   void end() {
     switch (_status) {
@@ -133,7 +134,6 @@ mixin TimeTracker implements Serializable, TimeControl {
 
   /// Returns the duration between the object start point and end point.
   ///
-  /// ---
   /// - Note: Time periods representing **pauses** are omitted.
   /// - If the status of the object is [TimeStatus.started], the
   ///   difference between [DateTime.now] and the first time point is returned.
@@ -144,7 +144,6 @@ mixin TimeTracker implements Serializable, TimeControl {
   /// Returns the duration between the object start point and end point as
   /// microseconds.
   ///
-  /// ---
   /// - Note: Time periods representing **pauses** are omitted.
   /// - If the status of the object is [TimeStatus.started], the
   ///   difference between now and the first time point is returned.
@@ -284,7 +283,7 @@ mixin TimeTracker implements Serializable, TimeControl {
     return 'status: ${status.name}';
   }
 
-  /// Returns `true` the current status is [TimeStatus.ready]
+  /// Returns `true` if the current status is [TimeStatus.ready]
   /// and false otherwise.
   bool get isReady => _status.isReady;
 
