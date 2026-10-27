@@ -13,8 +13,7 @@ however instead of elapsed ticks it records a [`DateTime`][DateTime] point
 whenever its status changes.
 
 The image below shows the available states (grey font) defined by
-the enum [`TimeStatus`][TimeStatus] and available transitions (green arrows)
-defined by the mixin [`TimeTracker`][TimeTracker].
+the enum [`TimeStatus`][TimeStatus] and available transitions defined by the mixin [`TimeTracker`][TimeTracker].
 
 ![TimeStatus](https://github.com/simphotonics/time_tracker/raw/main/images/time_status.svg?sanitize=true)
 
