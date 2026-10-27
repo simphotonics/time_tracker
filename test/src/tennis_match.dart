@@ -5,10 +5,10 @@ import 'package:time_tracker/time_tracker.dart';
 class TennisMatch with TimeTracker {
   final List<String> players;
 
-  TennisMatch(List<String> players) : players = List.unmodifiable(players);
+  new(List<String> players) : players = List.unmodifiable(players);
 
   /// Constructs an object from a json map.
-  factory TennisMatch.fromJson(Map<String, Object?> json) {
+  factory fromJson(Map<String, Object?> json) {
     if (json case {'players': List players}) {
       // Use `initTrackerfromJson` to initializer the time tracker.
       return TennisMatch(players.cast<String>())..initTrackerfromJson(json);
